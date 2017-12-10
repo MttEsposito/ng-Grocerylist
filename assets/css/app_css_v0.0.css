@@ -1,0 +1,37 @@
+.bodyBack{
+    background-color: #1ABC9C;
+}
+.navBarSet{
+    color: #fff;
+    font-size: 19px;
+}
+.icoUser{
+    margin: 5px 28px 0px 5px;
+}
+.appName{
+    display: block;
+    margin: -27px 0px 0px 0px;
+    text-align: center;
+}
+.userName{
+    display: block;
+    text-align: right;
+    margin: -26px 6px 0px 0px;
+}
+.navTab{
+    color:#fff;
+    width: 100%;
+}
+.tabNavLeft{
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+    margin-left: 10%;
+    cursor: pointer;
+}
+.tabNavRight{
+    display: inline-block;
+    width: 40%;
+    text-align: center;
+    cursor: pointer;
+}

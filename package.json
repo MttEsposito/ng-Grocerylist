@@ -1,7 +1,7 @@
 {
   "name": "ng-grocerylist",
   "version": "0.0.1",
-  "description": "simple angularjs grocerylist ",
+  "description": "simple angularjs grocerylist webapp",
   "main": "index.html",
   "license": "ISC",
   "dependencies": {
