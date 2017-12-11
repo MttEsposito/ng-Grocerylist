@@ -5,6 +5,12 @@
     color: #fff;
     font-size: 19px;
 }
+.navbarApp{
+    display: none;
+}
+.contentSite{
+    padding-top: 50px;
+}
 .icoUser{
     margin: 5px 28px 0px 5px;
 }

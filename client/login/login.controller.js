@@ -8,7 +8,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http) {
             url : "../../server/login_user.php",
             params: {
                 email: emailUser,
-                passowrd: passwordUser
+                password: passwordUser
             },
         })
         .then(function(response) {

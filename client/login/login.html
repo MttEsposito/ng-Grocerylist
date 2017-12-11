@@ -1,11 +1,15 @@
-<center>
-<h1>login</h1>
-</center>
-<div>
+<div class="contentSite">
     <center>
-        <input id="emailUser" type="text" name="email"/>
-        <input id="passwordUser"type="password" name="passowrd"/>
-        <input type="checkbox" name="remember_me" value="remember_me">remember<br>
-        <md-button class="md-raised" ng-click="sendLogin()">Login</md-button>
+        <h1>Login</h1>
     </center>
+    <div>
+        <center>
+            <form id="userLoginForm" ng-submit="sendLogin()">
+                <input id="emailUser" type="email" name="email" />
+                <input id="passwordUser" type="password" name="passowrd" />
+                <input type="checkbox" name="remember_me" value="remember_me">Remember me
+                <md-button type="submit" class="md-raised">Login</md-button>
+            </form>
+        </center>
+    </div>
 </div>
