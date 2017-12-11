@@ -33,6 +33,21 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         },
         onExit: '',
       })
+       .state('grocerylist', {
+        controller: 'groceryCtrl',
+        controllerAs: 'groceryCtrl',
+        url: '/grocerylist',
+        templateUrl: 'client/grocerylist/grocery.html',
+        onEnter: function($state){
+         if($.cookie('sessionLog')!='set'){
+           $state.go('login');
+         }else{
+             $(".navbarApp").css("display","block");
+             $('.userName').html($.cookie('user'))
+         }
+        },
+        onExit: '',
+      })
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){
          var state = $injector.get('$state');
