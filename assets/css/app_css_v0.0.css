@@ -22,7 +22,7 @@
 .userName{
     display: block;
     text-align: right;
-    margin: -26px 6px 0px 0px;
+    margin: -26px 21px 0px 0px;
 }
 .navTab{
     color:#fff;
@@ -39,5 +39,11 @@
     display: inline-block;
     width: 40%;
     text-align: center;
+    cursor: pointer;
+}
+.icoLogOut{
+    text-align: right;
+    display: block;
+    margin: -22px 0px 18px 0px;
     cursor: pointer;
 }

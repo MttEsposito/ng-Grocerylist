@@ -11,13 +11,14 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/app_css_v0.0.css">
   </head>
-  <body ng-app="nGgroceryList" ng-cloak class="bodyBack">
+  <body ng-app="nGgroceryList" ng-cloak class="bodyBack" >
   <!-- Navbar website -->
-  <div class="navbarApp">
+  
+  <div class="navbarApp " >
     <div class="navBarSet">
       <i class="fa icoUser fa-user-circle"></i>
       <appName class="appName">Grocery</appName>
-      <userName class="userName">Name</userName>
+      <userName class="userName"></userName><i class='fa fa-sign-out icoLogOut' user-log-out></i>
     </div>
     <div class="navTab">
       <div class="tabNavLeft">PAGE1</div>
@@ -37,11 +38,13 @@
     <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
     <script type="text/javascript" src="node_modules/ngkookies/ngKookies.min.js"></script>
+    <script type="text/javascript" src="node_modules/jquery.cookie/jquery.cookie.js"></script>
     <script type="text/javascript" src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
     <!-- Import core app js  -->
     <script type="text/javascript" src="app.js"></script>
     <!-- Import controllers js  -->
     <script type="text/javascript" src="client/login/login.controller.js"></script>
+    <script type="text/javascript" src="client/dashboard/dashboard.controller.js"></script>
     <!-- Custom js  -->
     <script type="text/javascript" src="assets/js/app_js_v0.0.js"></script>
   </body>

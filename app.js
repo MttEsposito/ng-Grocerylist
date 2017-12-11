@@ -11,9 +11,56 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         controllerAs: 'loginCtrl',
         url: '/login',
         templateUrl: 'client/login/login.html',
-        onEnter: '',
+        onEnter: function($state){
+         if($.cookie('sessionLog')=='set'){
+           $state.go('dashboard');
+         }
+        },
         onExit: '',
       })
-    //on diferent url location redirect to homepage
-    $urlRouterProvider.otherwise('/dashboard');
+      .state('dashboard', {
+        controller: 'dashCtrl',
+        controllerAs: 'dashCtrl',
+        url: '/dashboard',
+        templateUrl: 'client/dashboard/dashboard.html',
+        onEnter: function($state){
+         if($.cookie('sessionLog')!='set'){
+           $state.go('login');
+         }else{
+             $(".navbarApp").css("display","block");
+             $('.userName').html($.cookie('user'))
+         }
+        },
+        onExit: '',
+      })
+      //on error location redirect
+      $urlRouterProvider.otherwise(function($injector, $location){
+         var state = $injector.get('$state');
+         if($.cookie('sessionLog')=='set'){
+           state.go('dashboard');
+         }else{
+           state.go('login');
+         }
+         return $location.path();
+    });
+  })
+  .directive("userLogOut",function ($http,$kookies,$state) {
+  return{
+    link:function(scope, element, attrs){
+        element.click(function(){
+            if($kookies.get('sessionLog')=="set"){
+            $http({
+            method : "GET",
+            url : "server/logout_user.php",
+            })
+             .then(function(response) {
+                $(".navbarApp").css("display","none"); 
+                $kookies.set('sessionLog', 'unset');
+                $kookies.set('user', '');
+                $state.go('login');
+            })
+            }
+          }); 
+    }
+  }
   })
