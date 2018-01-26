@@ -79,3 +79,17 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
     }
   }
   })
+  .directive("checkOnlineUser",function(){
+      return{
+          link:function (){
+              setInterval(function(){ 
+                if(navigator.onLine){
+                    
+                }else{
+                    
+                }
+            }, 2000);
+          }
+      }
+  })
+  

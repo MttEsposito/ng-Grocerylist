@@ -10,6 +10,7 @@
 }
 .contentSite{
     padding-top: 50px;
+    background-color: #1ABC9C;
 }
 .icoUser{
     margin: 5px 28px 0px 5px;
@@ -48,8 +49,221 @@
     cursor: pointer;
 }
 .errorblankInpt {
-    border-color: #f54f4f;
+    border-color: #f54f4f!important;
+    outline: 0!important;
+    -webkit-box-shadow: inset 0 0 3px 2px #ff0000ad!important;
+    box-shadow: inset 0 0 3px 2px #ff0000ad!important;
+}
+.userLogIco{
+    font-size: 10em;
+    color:#fff;
+}
+.spacerForm{
+    padding:0px 15px 0px 15px;
+}
+.registerLink{
+    padding: 7px 10px;
+    background: #fff;
+    border: 2.4px solid #0095ff;
+    border-radius: 5px;
+    font-weight: 550;
+    color: #0095ff;
+}
+
+.registerLink:focus{
+    color: #0095ff;
+    text-decoration: none;
+}
+
+.registerLink:hover{
+    color: #0095ff;
+    text-decoration: none;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btnGro{
+    background-color: #007bff!important;
+    color:#fff!important;
+}
+spacerapp{
+    display: block;
+    height: 10px;
+}
+.alert-app-error{
+    padding: 7px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+/* grocerylist css*/
+itemlist{
+    color: #1ABC9C;
+    font-weight: 600;
+}
+numberitemlist{
+    float: right;
+    padding-right: 15%;
+    font-weight: 600;
+    color: #1ABC9C;
+}
+.crossBtn{
+    float: right;
+    font-size: 1.5em;
+    color: red;
+}
+/*toast CSS rule*/
+#appToast {
+    visibility: hidden;
+    min-width: 245px;
+    margin-left: -125px;
+    background-color: #007bff!important;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50.6%;
+    bottom: 30px;
+    font-size: 15px;
+}
+
+#appToast.show {
+    visibility: visible;
+    -webkit-animation: fadeinToast 0.5s, fadeoutToast 0.5s 4.5s;
+    animation: fadeinToast 0.5s, fadeoutToast 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadeinToast {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeinToast {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeoutToast {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeoutToast {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.inputItem{
+    bottom: 13px;
+    position: fixed;
+    margin-right: 16px;
+}
+.addBtn{
+    margin-top: 0px!important;
+    background: #fff!important;
+}
+.plusIcoItem{
+    color:#1ABC9C!important;
+    font-size: 1.5em;
+    margin-top: 3px;
+}
+.shoppList{
+    margin: 1px 8px 8px 8px;
+    max-height: 455px;
+    overflow-y: scroll;
+    transition:0.3s;
+}
+.check-item{
+    opacity: 0.8;
+}
+.disable-btn{
+    pointer-events:none;
+}
+.myItem:focus{
     outline: 0;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(243, 30, 30, 0.6);
+}
+.inputItemTxt{
+    border-radius: 60px!important;
+    height: 40px;
+    font-size: 17px;
+    color:#1ABC9C;
+}
+.inputCurrency{
+    color:#1ABC9C;
+    border-radius: 60px!important;
+}
+.fabComplete{
+    bottom: 60px!important;
+    right: 8px!important;
+    background-color: #007bff!important;
+    transform: scale(0);
+}
+.cartIco{
+    font-size: 1.5em;
+    margin-top: 1px;
+}
+
+.modalXBtn{
+    color:#fff;
+    opacity: 1;
+}
+.modalComplete{
+    box-shadow: 0 3px 9px 1px #cccccc4d;
+    -webkit-box-shadow: 0 3px 9px 1px #cccccc4d;
+    border:0px;
+}
+
+.modalFooter{
+    background-color: #1ABC9C;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.modalTitle{
+    color:#fff;
+    background-color:#1ABC9C;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid #ccc;
+}
+
+.modalBody{
+    border-bottom: 1px solid #ccc;
+    color:#fff;
+    background-color:#1ABC9C;
+}
+numberrecap{
+    float: right;
+    margin-right: 10%;
+}
+itemrecap{
+    margin-left: 5%;
+}
+ @media (min-width: 650px) {
+    .shoppList {
+        max-height: 186px;
+    }
 }

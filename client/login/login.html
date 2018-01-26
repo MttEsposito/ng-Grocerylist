@@ -1,15 +1,24 @@
-<div class="contentSite" ng-controller="loginCtrl">
+<div class="contentSite">
     <center>
-        <h1>Login</h1>
+        <i class="fa fa-5x fa-user-circle userLogIco"></i>
     </center>
-    <div>
-        <center>
-            <form id="userLoginForm" ng-submit="sendLogin()">
-                <input id="emailUser" type="email" name="email" />
-                <input id="passwordUser" type="password" name="passowrd" />
-                <input type="checkbox" name="remember_me" value="remember_me">Remember me
-                <md-button type="submit" class="md-raised">Login</md-button>
+    <spacerapp></spacerapp>
+    <div class="spacerForm">
+            <form id="userLoginForm" ng-submit="sendLogin()" autocomplete="off">
+                <input class="form-control" id="emailUser" type="email" name="email" placeholder="Enter email..." />
+                <spacerapp></spacerapp>
+                <input class="form-control" id="passwordUser" type="password" name="passowrd" placeholder="Enter password..." />
+                <spacerapp></spacerapp>
+                <div style="padding:9px 0px 9px 0px;">
+                    <center>
+                        <md-button id="btnLogin" type="submit" class="md-raised btnGro">Login</md-button>
+                    </center>
+                </div>
+                <br>
+                <center>
+                    <md-button ng-href="{{rgisterUrl}}" class="md-raised btnGro" target="_blank">Register a new Account!</md-button>
+                </center>
             </form>
-        </center>
+            <div id="appToast" class="Toast"></div>
     </div>
 </div>
