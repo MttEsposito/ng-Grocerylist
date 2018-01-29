@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,$kookies,$state) {
+angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,$kookies,$state,$timeout) {
     $scope.products = [];
     var addItemCheck;
      $scope.addItem = function () {
@@ -30,24 +30,46 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
             $scope.item="";
             checkCompleteFabButton();
             $('#item').focus();
-            //var objDiv = document.getElementById("groceryListPrint");
-            //objDiv.scrollTop = objDiv.scrollHeight;
+            $timeout(function() {
+              $("#groceryListPrint").scrollTop($("#groceryListPrint")[0].scrollHeight);
+            }, 0, false);
     }
     $scope.removeItem = function (x) {
         $scope.products.splice(x, 1);
         checkCompleteFabButton();
     }
-    $scope.checkItem = function (y) {
-        if($scope.products[y].check == false){
-            $scope.products[y].check=true;
-            $('#i'+y.toString()).addClass('check-item');
-            $('#x'+y.toString()).addClass('disable-btn');
-        }else{
-            $scope.products[y].check=false;
-            $('#i'+y.toString()).removeClass('check-item');
-            $('#x'+y.toString()).removeClass('disable-btn');
+    $scope.addNum=function(e){
+        $scope.products[e].numberitem=$scope.products[e].numberitem+1;
+    }
+    $scope.removeNum=function(e){
+        if($scope.products[e].numberitem!=1){
+        $scope.products[e].numberitem=$scope.products[e].numberitem-1;
         }
-        checkCompleteFabButton();
+    }
+    $scope.checkItem = function (y,z) {
+        if(z.target.classList[0]=='myItem')
+        {
+            if($scope.products[y].check == false)
+            {
+                $scope.products[y].check=true;
+                $('#i'+y.toString()).addClass('check-item');
+                $('#x'+y.toString()).addClass('disable-btn');
+                $('#r'+y.toString()).addClass('disable-btn');
+                $('#a'+y.toString()).addClass('disable-btn');
+            }
+            else
+            {
+                $scope.products[y].check=false;
+                $('#i'+y.toString()).removeClass('check-item');
+                $('#x'+y.toString()).removeClass('disable-btn');
+                $('#r'+y.toString()).removeClass('disable-btn');
+                $('#a'+y.toString()).removeClass('disable-btn');
+            }
+            checkCompleteFabButton();
+        }
+        else{
+            
+        }
     }
     function checkCompleteFabButton(){
         var checkAll=null;
@@ -75,6 +97,45 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
                 totalItem+=$scope.products[i].item + ';'; 
                 totalQty+=$scope.products[i].numberitem + ';'; 
             }
+             $http({
+            method : "GET",
+            url : "../../server/store_data_user.php",
+            cache:false,
+            params: {
+                listitem: totalItem,
+                qtyitem: totalQty,
+                price:totalCurrency
+            },
+            })
+            .then(function(response){
+                console.log(response);
+                $('#completeShopping').modal('hide');
+                if(response.data.success=="success"){
+                    $('#completeBtn').css('transform','scale(0)');
+                var toast = document.getElementById("appToast");
+                    toast.innerHTML="Data Saved";
+                    toast.className = "show";
+                    setTimeout(function(){
+                    toast.className = toast.className.replace("show", "");
+                    }, 5000);
+                    $scope.products = [];
+                }else{
+                    var toast = document.getElementById("appToast");
+                    toast.innerHTML="Error try again later";
+                    toast.className = "show";
+                    setTimeout(function(){
+                    toast.className = toast.className.replace("show", "");
+                    }, 5000);
+                }
+            })
+            .catch(function(err){
+                var toast = document.getElementById("appToast");
+                    toast.innerHTML="Error try again later";
+                    toast.className = "show";
+                    setTimeout(function(){
+                    toast.className = toast.className.replace("show", "");
+                    }, 5000);
+            })
         }
         else
         {

@@ -10,14 +10,15 @@
         </div>
     </form>
     <div id="groceryListPrint" class="list-group shoppList" style="padding: 1px 8px 8px 8px; ">
-        <div id='i{{$index}}' class="myItem list-group-item" ng-repeat="x in products" ng-click="checkItem($index)">
+        <div id='i{{$index}}' class="myItem list-group-item" ng-repeat="x in products" ng-click="checkItem($index,$event)">
             <i id='x{{$index}}' ng-click="removeItem($index)" class="crossBtn fa fa-times"></i>
-            <itemlist>{{x.item}}</itemlist><numberitemlist>{{x.numberitem}}</numberitemlist> 
+            <itemlist>{{x.item}}</itemlist><numberitemlist><i id='r{{$index}}' class="fa fa-caret-left leftNum" ng-click="removeNum($index)"></i> {{x.numberitem}} <i id='a{{$index}}' class="fa fa-caret-right rightNum" ng-click="addNum($index)"></i></numberitemlist>
         </div>
     </div>
     <md-button id="completeBtn" class="md-fab md-mini md-primary md-fab-bottom-right fabComplete" aria-label="Complete" data-toggle="modal" data-target="#completeShopping">
           <md-icon class="fa fa-shopping-cart cartIco"></md-icon>
     </md-button>
+    <div id="appToast" class="Toast" style="bottom:68px;"></div>
     <!-- Modal -->
     <div id="completeShopping" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog">
@@ -29,8 +30,8 @@
           </div>
           <div class="modal-body modalBody">
             <p style="font-size: 15px;">Recap list</p>
-            <ul ng-repeat="x in products">
-                <li><itemrecap>{{x.item}}</itemrecap> <numberrecap>{{x.numberitem}}</numberrecap></li>
+            <ul class="modalList">
+                <li ng-repeat="x in products"><itemrecap>{{x.item}}</itemrecap> <numberrecap>{{x.numberitem}}</numberrecap></li>
             </ul>
              <p>Total spent</p>
               <input id="totalSpent" type="number" class="form-control inputCurrency" placeholder="Enter the total spent of the list..." />
@@ -39,7 +40,6 @@
             <md-button class="md-raised btnGro" ng-click="saveData()">Save</md-button>
           </div>
         </div>
-    
       </div>
     </div>
 </div>

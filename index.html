@@ -11,17 +11,19 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/app_css_v0.0.css">
   </head>
-  <body ng-app="nGgroceryList" ng-cloak class="bodyBack" check-online-user>
+  <body id="bodyApp" ng-app="nGgroceryList" ng-cloak class="bodyBack">
   <!-- Navbar website -->
-  <div class="navbarApp " >
+  <div class="navbarApp">
     <div class="navBarSet">
       <i class="fa icoUser fa-user-circle"></i>
-      <appName class="appName">Grocery</appName>
+      <appName class="appName">Grocery List</appName>
       <userName class="userName"></userName><i class='fa fa-sign-out icoLogOut' user-log-out></i>
     </div>
     <div class="navTab">
-      <div class="tabNavLeft" ui-sref="grocerylist">grocery</div>
-      <div class="tabNavRight" ui-sref="dashboard">dashboard</div>
+      <center>
+        <md-button id="grocery" ui-sref="grocerylist" class="md-raised btnTab" >grocerylist</md-button>
+        <md-button id="dashboard" ui-sref="dashboard" class="md-raised btnTab" >dashboard</md-button>
+      </center>
     </div>
   </div>
   <!-- Viewer Content -->

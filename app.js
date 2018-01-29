@@ -30,8 +30,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
              $(".navbarApp").css("display","block");
              $('.userName').html($.cookie('user'))
          }
+         $('#dashboard').addClass('btnTabAct');
         },
-        onExit: '',
+        onExit: function(){
+            $('#dashboard').removeClass('btnTabAct');
+        },
       })
        .state('grocerylist', {
         controller: 'groceryCtrl',
@@ -45,8 +48,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
              $(".navbarApp").css("display","block");
              $('.userName').html($.cookie('user'))
          }
+         $('#grocery').addClass('btnTabAct');
         },
-        onExit: '',
+        onExit: function(){
+            $('#grocery').removeClass('btnTabAct');
+        },
       })
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){
@@ -65,10 +71,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         element.click(function(){
             if($kookies.get('sessionLog')=="set"){
             $http({
+            cache:false,
             method : "GET",
             url : "server/logout_user.php",
             })
-             .then(function(response) {
+            .then(function(response) {
                 $(".navbarApp").css("display","none"); 
                 $kookies.set('sessionLog', 'unset');
                 $kookies.set('user', '');
@@ -78,18 +85,5 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
           }); 
     }
   }
-  })
-  .directive("checkOnlineUser",function(){
-      return{
-          link:function (){
-              setInterval(function(){ 
-                if(navigator.onLine){
-                    
-                }else{
-                    
-                }
-            }, 2000);
-          }
-      }
   })
   

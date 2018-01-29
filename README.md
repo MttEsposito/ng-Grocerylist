@@ -6,7 +6,7 @@ Points of the app:
 
 2)As a user i can additem to my grocerylist |X|
 
-3)As a user i can read my grocerylist | |
+3)As a user i can read my grocerylist |X|
 
 4)As a user i can edit my grocerylist | |
 
