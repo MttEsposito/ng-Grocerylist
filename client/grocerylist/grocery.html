@@ -1,7 +1,7 @@
 <div class="contentSite">
     <form ng-submit="addItem()" style="margin: 1px 8px 8px;" autocomplete="off">
         <div class="input-group inputItem">
-            <input type="text" id="item" class="form-control inputItemTxt" placeholder="Add item to your shopping list..." ng-model="item"/>
+            <input type="text" id="item" class="form-control inputItemTxt" placeholder="Add item to your shopping list..." ng-model="item" ng-keypress="checkKeyInput($event)"/>
             <div class="input-group-btn">
                  <md-button class="md-fab md-mini md-primary addBtn" aria-label="add item" type="submit">
                     <md-icon class="fa fa-plus plusIcoItem" ></md-icon>
@@ -18,7 +18,7 @@
     <md-button id="completeBtn" class="md-fab md-mini md-primary md-fab-bottom-right fabComplete" aria-label="Complete" data-toggle="modal" data-target="#completeShopping">
           <md-icon class="fa fa-shopping-cart cartIco"></md-icon>
     </md-button>
-    <div id="appToast" class="Toast" style="bottom:68px;"></div>
+    <div id="appToastGro" class="Toast"></div>
     <!-- Modal -->
     <div id="completeShopping" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
       <div class="modal-dialog">
@@ -37,7 +37,7 @@
               <input id="totalSpent" type="number" class="form-control inputCurrency" placeholder="Enter the total spent of the list..." />
           </div>
           <div class="modal-footer modalFooter">
-            <md-button class="md-raised btnGro" ng-click="saveData()">Save</md-button>
+            <md-button id="saveDataBtn" class="md-raised btnGro" ng-click="saveData()">Save</md-button>
           </div>
         </div>
       </div>

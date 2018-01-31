@@ -21,7 +21,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
                     $kookies.set('user', response.data.name);
                     $(".navbarApp").slideDown("slow");
                     $('.userName').html($kookies.get('user'));
-                    $state.go('dashboard');
+                    $state.go('grocerylist');
                 }else{
                     var toast = document.getElementById("appToast");
                     toast.innerHTML="Incorrect username or password";

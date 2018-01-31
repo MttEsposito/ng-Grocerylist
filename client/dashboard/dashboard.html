@@ -1,10 +1,20 @@
 <div class="contentSite">
     <center>
-        <h1>USER</h1>
+        <md-input-container ng-click="checkClick()">
+    		<md-select id="selectTime" ng-model="dataTime.selectedOptions" ng-change="updateData()" aria-label="dataSelect" class="selectData">
+    		    <md-option ng-value="data" ng-repeat="data in dataTime.availableOptions track by data.id" ng-selected="$last" class="selectData">
+    				{{ data.id }}
+    			</md-option>
+    		</md-select>
+    	</md-input-container>
+	</center>
+	<center id="loader">
+        <div class="loader"></div> 
     </center>
-    <div>
-        <center>
-         <h1>welcome</h1>
-        </center>
+    <center id="errorLabel"></center>
+    <div id="dataPrinter">
+    <center class="graphContainer">
+        <canvas id='chartPrint'></canvas>
+    </center>
     </div>
 </div>

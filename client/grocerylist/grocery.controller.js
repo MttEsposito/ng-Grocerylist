@@ -97,22 +97,25 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
                 totalItem+=$scope.products[i].item + ';'; 
                 totalQty+=$scope.products[i].numberitem + ';'; 
             }
-             $http({
+            var resItem=totalItem.substring(0, totalItem.length-1);
+            var resQty=totalQty.substring(0, totalQty.length-1);
+            $('#saveDataBtn').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
+            $http({
             method : "GET",
             url : "../../server/store_data_user.php",
             cache:false,
             params: {
-                listitem: totalItem,
-                qtyitem: totalQty,
+                listitem: resItem,
+                qtyitem: resQty,
                 price:totalCurrency
             },
             })
             .then(function(response){
-                console.log(response);
                 $('#completeShopping').modal('hide');
+                $('#saveDataBtn').html("Save");
                 if(response.data.success=="success"){
                     $('#completeBtn').css('transform','scale(0)');
-                var toast = document.getElementById("appToast");
+                var toast = document.getElementById("appToastGro");
                     toast.innerHTML="Data Saved";
                     toast.className = "show";
                     setTimeout(function(){
@@ -120,7 +123,7 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
                     }, 5000);
                     $scope.products = [];
                 }else{
-                    var toast = document.getElementById("appToast");
+                    var toast = document.getElementById("appToastGro");
                     toast.innerHTML="Error try again later";
                     toast.className = "show";
                     setTimeout(function(){
@@ -129,7 +132,7 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
                 }
             })
             .catch(function(err){
-                var toast = document.getElementById("appToast");
+                var toast = document.getElementById("appToastGro");
                     toast.innerHTML="Error try again later";
                     toast.className = "show";
                     setTimeout(function(){
@@ -144,6 +147,12 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
             {
                 $('#totalSpent').removeClass('errorblankInpt');
             }, 1000);
+        }
+    }
+    $scope.checkKeyInput=function(x){
+        if(x.which >= 65 && x.which <= 122){ 
+        }else{
+            event.preventDefault(); 
         }
     }
 })

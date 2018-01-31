@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "simple angularjs grocerylist webapp",
   "main": "index.html",
-  "author": "Mattia Esposito",
+  "author": "Mattia Esposito , Federico Canzi",
   "license": "ISC",
   "dependencies": {
     "angular": "^1.6.8",

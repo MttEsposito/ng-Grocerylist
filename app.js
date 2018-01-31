@@ -86,4 +86,3 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
     }
   }
   })
-  

@@ -29,7 +29,7 @@
     color: #1ABC9C;
     width: 100%;
     background: #fff;
-    margin-top: -18px;
+    margin-top: -3px;
     padding-top: 10px;
 }
 .btnTab{
@@ -42,7 +42,7 @@
     background: #1ABC9C!important;
 }
 .icoLogOut{
-    text-align: right;
+    float: right;
     display: block;
     margin: -22px 0px 18px 0px;
     cursor: pointer;
@@ -80,13 +80,13 @@
 }
 
 .loader {
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+    border: 8px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 8px solid #3498db;
+    width: 75px;
+    height: 75px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
 }
 
 /* Safari */
@@ -175,6 +175,76 @@ numberitemlist{
     to {bottom: 0; opacity: 0;}
 }
 
+#appToastGro {
+    visibility: hidden;
+    min-width: 245px;
+    margin-left: -125px;
+    background-color: #007bff!important;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50.6%;
+    bottom: 68px;
+    font-size: 15px;
+}
+
+#appToastGro.show {
+    visibility: visible;
+    -webkit-animation: fadeinToastgro 0.5s, fadeoutToastGro 0.5s 4.5s;
+    animation: fadeinToastgro 0.5s, fadeoutToastGro 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadeinToastgro {
+    from {bottom: 68px; opacity: 0;}
+    to {bottom: 68px; opacity: 1;}
+}
+
+@keyframes fadeinToastgro {
+    from {bottom: 68px; opacity: 0;}
+    to {bottom: 68px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeoutToastGro {
+    from {bottom: 68px; opacity: 1;}
+    to {bottom: 68px; opacity: 0;}
+}
+
+@keyframes fadeoutToastGro {
+ from {bottom: 68px; opacity: 1;}
+    to {bottom: 68px; opacity: 0;}
+}
+#errorLabel{
+    color: #1ABC9C;
+    font-size: 20px;
+    background: #fff;
+    margin-left: 19%;
+    margin-right: 19%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-radius: 20px;
+}
+.md-select-icon{
+    color:#1ABC9C!important;
+}
+md-select:not([disabled]):focus .md-select-value{
+	color:#1ABC9C!important;
+	border-bottom-color: #fff;
+}
+.graphContainer{
+    width: 95%;
+    background: #fff;
+    border-radius: 13px;
+    padding-top: 20px;
+    margin-left: 2.5%;
+    padding-bottom:8px;
+}
+.selectData{
+    color:#1ABC9C!important;
+    background-color: #fff;
+}
 .inputItem{
     bottom: 13px;
     position: fixed;
