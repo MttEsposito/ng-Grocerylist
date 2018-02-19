@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width">
     <title>nGgroceryList</title>
     <!-- Library CSS dependencies -->
+    <link rel="shortcut icon" type="image/png" href="app-assets/img/Icon.png">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="node_modules/angular-material/angular-material.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/app_css_v0.0.css">
+    <link rel="stylesheet" href="app-assets/css/app_css_v0.0.css">
   </head>
-  <body id="bodyApp" ng-app="nGgroceryList" ng-cloak class="bodyBack">
+  <body id="bodyApp" ng-app="nGgroceryList" ng-cloak class="bodyBack" on-app-close>
   <!-- Navbar website -->
   <div class="navbarApp">
     <div class="navBarSet">
@@ -47,7 +48,9 @@
     <script type="text/javascript" src="client/login/login.controller.js"></script>
     <script type="text/javascript" src="client/dashboard/dashboard.controller.js"></script>
     <script type="text/javascript" src="client/grocerylist/grocery.controller.js"></script>
+    <!-- Import services js  -->
+    <script type="text/javascript" src="client/dashboard/dashboard.service.js"></script>
     <!-- Custom js  -->
-    <script type="text/javascript" src="assets/js/app_js_v0.0.js"></script>
+    <script type="text/javascript" src="app-assets/js/app_js_v0.0.js"></script>
   </body>
 </html>

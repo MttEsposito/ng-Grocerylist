@@ -52,6 +52,7 @@
     outline: 0!important;
     -webkit-box-shadow: inset 0 0 3px 2px #ff0000ad!important;
     box-shadow: inset 0 0 3px 2px #ff0000ad!important;
+    -moz-box-shadow: inset 0 0 3px 2px #ff0000ad!important;
 }
 .userLogIco{
     font-size: 10em;
@@ -248,7 +249,8 @@ md-select:not([disabled]):focus .md-select-value{
 .inputItem{
     bottom: 13px;
     position: fixed;
-    margin-right: 16px;
+    margin: 1px 8px 8px;
+    z-index:100;
 }
 .addBtn{
     margin-top: 0px!important;
@@ -264,6 +266,8 @@ md-select:not([disabled]):focus .md-select-value{
     max-height: 455px;
     overflow-y: scroll;
     transition:0.3s;
+    padding: 1px 8px 8px 8px;
+    z-index:10;
 }
 .check-item{
     opacity: 0.8;
@@ -285,7 +289,7 @@ md-select:not([disabled]):focus .md-select-value{
     border-radius: 60px!important;
 }
 .fabComplete{
-    bottom: 60px!important;
+    bottom: 65px!important;
     right: 8px!important;
     background-color: #007bff!important;
     transform: scale(0);
@@ -302,6 +306,7 @@ md-select:not([disabled]):focus .md-select-value{
 .modalComplete{
     box-shadow: 0 3px 9px 1px #cccccc4d;
     -webkit-box-shadow: 0 3px 9px 1px #cccccc4d;
+    -moz-box-shadow: inset 0 3px 9px 1px #cccccc4d;
     border:0px;
 }
 
@@ -332,9 +337,15 @@ numberrecap{
 itemrecap{
     margin-left: 5%;
 }
+.groDate{
+   margin-left: 5px; 
+}
 .loginInput{
     border-radius:60px;
     color: #1ABC9C;
+}
+.titleDas{
+    color:#fff;
 }
 .leftNum{
     font-size: 1.2em;
@@ -361,11 +372,56 @@ itemrecap{
     height: 20%;
     box-shadow: 0 3px 9px 1px #cccccc4d;
     -webkit-box-shadow: 0 3px 9px 1px #cccccc4d;
+    -moz-box-shadow: 0 3px 9px 1px #cccccc4d;
     border: 0px;
     color: #fff;
     font-size: 16px;
     text-align:center;
     padding-top: 25px;
+}
+.dataContPrint{
+    padding: 8px 10px;
+    color: #fff;
+    border: 4px solid;
+    font-size: 18px;
+    margin: 9px;
+    border-radius: 20px;
+}
+dataSpent{
+    float:right;
+    margin-right:3%;
+}
+qty{
+    float:right;
+    margin-right:3%;
+}
+recaplist{
+    border: 2px solid;
+    display: block;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+.recaplist{
+    border: 2px solid;
+    display: block;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+item{
+    margin-left: 5px;
+}
+#recapListPrint{
+    max-height: 300px;
+    overflow-y: scroll;
+    margin: 9px 4px 0px 4px;
+    padding: 8px 10px;
+    color: #fff;
+    font-size: 15px;
+}
+.titleDasSort{
+    margin: 10px;
+    margin-bottom: -9px;
+    color: #fff;
 }
  @media (min-width: 650px) {
     .shoppList {
@@ -374,4 +430,16 @@ itemrecap{
     .modalList{
         max-height: 100px;
     }
+}
+close{
+    width: 100%;
+    height: 100%;
+    padding-top: 120px;
+    top: 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.23);
+    z-index: 2000;
 }

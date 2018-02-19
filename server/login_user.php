@@ -2,11 +2,6 @@
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
 	session_start();
-	if($_SESSION['app_user_name']!=""){
-		echo 'reset';
-		session_unset();
-		session_destroy();
-	}else{
 	$UserEmail = $_GET['email']; 
 	$UserPassword = $_GET['password'];
 	include_once 'connect-to-db-app.php';
@@ -32,6 +27,5 @@
 	}
 	catch(Exception $e){
 		mysqli_close($con);
-	}
 	}
 ?>

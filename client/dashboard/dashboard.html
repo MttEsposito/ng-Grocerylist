@@ -1,5 +1,6 @@
 <div class="contentSite">
     <center>
+        <h3 class='titleDasSort'>Sort data by</h3>
         <md-input-container ng-click="checkClick()">
     		<md-select id="selectTime" ng-model="dataTime.selectedOptions" ng-change="updateData()" aria-label="dataSelect" class="selectData">
     		    <md-option ng-value="data" ng-repeat="data in dataTime.availableOptions track by data.id" ng-selected="$last" class="selectData">
@@ -15,6 +16,17 @@
     <div id="dataPrinter">
     <center class="graphContainer">
         <canvas id='chartPrint'></canvas>
+        <xaxes class="hide">date</xaxes>
     </center>
+    <div class="dataContPrint">
+    <p>Higher spent : <dataSpent>{{maxSpent}} €</dataSpent></p>
+    <p>Lower spent : <dataSpent>{{minSpent}} €</dataSpent></p>
+    <p>Average spent : <dataSpent>{{averageSpent}} €</dataSpent></p>
+    </div>
+    <center>
+        <h3 class='titleDas'>Grocery List recap:</h3>
+    </center>
+        <div id="recapListPrint">
+        </div>
     </div>
 </div>

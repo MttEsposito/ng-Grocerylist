@@ -1,8 +1,8 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$kookies) {
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$kookies,dashSrv) {
    	angular.element(document).ready(function () {
 			getDataUser();
 		});
-		var isClick=false,myChart,dataY=[],dataX=[];
+		var isClick=false,myChart,dataY=[],dataX=[],recapPrint=[];
 		function getDataUser(){
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
@@ -16,8 +16,8 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
             },
             })
             .then(function(res){
-                var item=[],qty=[],tot=[],maxSpent,minSpent,averageSpent;
-                dataY=[],dataX=[];
+                var item=[],qty=[];
+                dataY=[],dataX=[],recapPrint=[];
                 $('#loader').addClass('hide');
 		        $('#dataPrinter').removeClass('hide');
 		        if(res.data.nodata=="nodata")
@@ -35,15 +35,33 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
                        dataY.push(res.data[i].prezzo);
                        item.push(res.data[i].item);
                        qty.push(res.data[i].qty);
-                       tot.push({item:item[i].split(";")});
+                       if(res.data[i].item.includes(";")){
+                       recapPrint.push({item:res.data[i].item.split(";"),qty:res.data[i].qty.split(";"),date:res.data[i].data})
+                       }else{
+                       recapPrint.push({item:res.data[i].item,qty:res.data[i].qty,date:res.data[i].data})
+                       }
                     }
-                maxSpent=Math.max.apply(null,dataY.map(Number));
-                minSpent=Math.min.apply(null,dataY.map(Number));
-                averageSpent = dataY.map(Number).reduce((a, b) => a + b, 0)/dataY.map(Number).length;
-                if(myChart!=undefined){
+                $scope.maxSpent = dashSrv.maX(dataY);
+                $scope.minSpent = dashSrv.miN(dataY);
+                $scope.averageSpent = dashSrv.avG(dataY);
+                if(myChart != undefined){
                 	myChart.destroy();
                 }
-                chartCreate();		
+                chartCreate();
+                var resData="";
+                for(var i=0;i<recapPrint.length;i++)
+                {
+                	if(Array.isArray(recapPrint[i].item)){
+                		resData+="<recaplist><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div>";
+                		for(var j=0;j<recapPrint[i].item.length;j++){
+                		   resData+="<div><item>Item "+recapPrint[i].item[j]+"</item> <qty>Number  "+recapPrint[i].qty[j]+"</qty></div>";
+                		}
+                		resData=resData+"</recaplist>"
+                	}else{
+                	resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div><item>Item "+recapPrint[i].item+"</item> <qty>Number "+recapPrint[i].qty+"</qty></div>";
+                	}
+                }
+                $('#recapListPrint').html(resData);
 		        }
             })
             .catch(function(err){
@@ -79,10 +97,10 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
     	 	datasets: 
     	 	[
 		    	{
-		          label: "My Shopping History",
+		          label: "Shopping History",
 		          fill: true,
 		          lineTension: 0,
-		          backgroundColor: ['#1abc9c4f'],
+		          backgroundColor: "rgba(26, 188, 156,0.3)",
 		          borderColor: "#1ABC9C",
 		          pointBorderColor: "#1ABC9C",
 		          pointBorderWidth: 1,
@@ -99,6 +117,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
 	    };
 	    if(dataX.length>4)
 	    {
+	    	$("xaxes").removeClass('hide')
 	    	var option=
 	        {
 	    		scales:
@@ -112,7 +131,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
 	    }
 	    else
 	    {
-	     var option={};
+	     $("xaxes").addClass('hide')
 	    }
 		myChart = new Chart(canvas, {
 			type: 'line',

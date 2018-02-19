@@ -101,7 +101,7 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
             var resQty=totalQty.substring(0, totalQty.length-1);
             $('#saveDataBtn').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
             $http({
-            method : "GET",
+            method : "POST",
             url : "../../server/store_data_user.php",
             cache:false,
             params: {

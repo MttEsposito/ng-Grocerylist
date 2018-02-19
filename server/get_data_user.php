@@ -31,8 +31,8 @@
 		}
 	try
 	{
-		mysqli_query($con,$getUserData);
-			if($query = mysqli_query($con,$getUserData))
+		$query = mysqli_query($con,$getUserData);
+			if($query->num_rows > 0)
 				{
 				while($row = mysqli_fetch_array($query))
 					{
@@ -47,7 +47,7 @@
 						$myJson = json_encode($props);
 						echo $myJson;
 				}
-				else
+			else
 				{
 					$resultData->nodata = "nodata";
 					$myJson = json_encode($resultData);

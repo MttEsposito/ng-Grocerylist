@@ -70,6 +70,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
     link:function(scope, element, attrs){
         element.click(function(){
             if($kookies.get('sessionLog')=="set"){
+                $('body').append("<close><center><div class='loader'></div><center></close>");
             $http({
             cache:false,
             method : "GET",
@@ -80,9 +81,28 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
                 $kookies.set('sessionLog', 'unset');
                 $kookies.set('user', '');
                 $state.go('login');
+                $('close').remove();
             })
             }
           }); 
     }
   }
   })
+//     .directive("onAppClose",function ($http,$kookies) {
+//   return{
+//     link:function(scope, element, attrs){
+//         window.addEventListener("beforeunload", function(event) {
+//             event.returnValue = "Write something clever here..";
+//             $kookies.set('sessionLog', 'unset');
+//             $kookies.set('user', '');
+//             $http({
+//             cache:false,
+//             method : "GET",
+//             url : "server/logout_user.php",
+//             })
+//             .then(function(response) {
+//             })
+//         })
+//     }
+//   }
+//   })

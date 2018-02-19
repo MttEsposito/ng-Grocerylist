@@ -8,8 +8,8 @@ Points of the app:
 
 3)As a user i can read my grocerylist |X|
 
-4)As a user i can edit my grocerylist | |
+4)As a user i can edit my grocerylist |X|
 
-5)As a user i can watch my stat of how much i spent | |
+5)As a user i can watch my stat of how much i spent |X|
  
-6)As a user i can reset all my stat data | |
+6)As a user i can reset all my stat data |?|
