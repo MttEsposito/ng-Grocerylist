@@ -1,10 +1,11 @@
 angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$kookies,$state) {
     $scope.rgisterUrl = 'http://google.com';
     $scope.sendLogin=function(){
-        var emailUser = $('#emailUser').val();
-        var passwordUser = $('#passwordUser').val()
+        let emailUser = $('#emailUser').val();
+        let passwordUser = $('#passwordUser').val()
         if(emailUser != "" && passwordUser != ""){
             $('#btnLogin').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
+            $('#btnLogin').addClass('disBtn');
             $http({
             method : "GET",
             url : "../../server/login_user.php",
@@ -15,6 +16,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
             },
             })
             .then(function(response) {
+                $('#btnLogin').removeClass('disBtn');
                 $('#btnLogin').html("Login");
                 if(response.data.userid!="error"){
                     $kookies.set('sessionLog', 'set');
@@ -23,7 +25,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
                     $('.userName').html($kookies.get('user'));
                     $state.go('grocerylist');
                 }else{
-                    var toast = document.getElementById("appToast");
+                    let toast = document.getElementById("appToast");
                     toast.innerHTML="Incorrect username or password";
                     toast.className = "show";
                     setTimeout(function(){
@@ -33,7 +35,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
             })
             .catch(function(err){
                     $('#btnLogin').html("Login");
-                    var toast = document.getElementById("appToast");
+                    let toast = document.getElementById("appToast");
                     toast.innerHTML="Something wrong try again later";
                     toast.className = "show";
                     setTimeout(function(){

@@ -12,8 +12,8 @@
     <spacerapp></spacerapp>
     <div id="groceryListPrint" class="list-group shoppList">
         <div id='i{{$index}}' class="myItem list-group-item" ng-repeat="x in products" ng-click="checkItem($index,$event)">
-            <i id='x{{$index}}' ng-click="removeItem($index)" class="crossBtn fa fa-times"></i>
-            <itemlist>{{x.item}}</itemlist><numberitemlist><i id='r{{$index}}' class="fa fa-caret-left leftNum" ng-click="removeNum($index)"></i> {{x.numberitem}} <i id='a{{$index}}' class="fa fa-caret-right rightNum" ng-click="addNum($index)"></i></numberitemlist>
+            <i id='x{{$index}}' ng-click="removeItem($index)" class="crossBtn fa fa-times actBtnGro{{$index}}"></i>
+            <itemlist>{{x.item}}</itemlist><numberitemlist><i id='r{{$index}}' class="fa fa-caret-left leftNum actBtnGro{{$index}}" ng-click="removeNum($index)"></i> {{x.numberitem}} <i id='a{{$index}}' class="fa fa-caret-right rightNum actBtnGro{{$index}}" ng-click="addNum($index)"></i></numberitemlist>
         </div>
     </div>
     <md-button id="completeBtn" class="md-fab md-mini md-primary md-fab-bottom-right fabComplete" aria-label="Complete" data-toggle="modal" data-target="#completeShopping">

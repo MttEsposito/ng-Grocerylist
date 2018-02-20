@@ -107,7 +107,7 @@
 }
 spacerapp{
     display: block;
-    height: 10px;
+    height: 12px;
 }
 .alert-app-error{
     padding: 7px;
@@ -132,6 +132,10 @@ numberitemlist{
     float: right;
     font-size: 1.5em;
     color: red;
+}
+.disBtn{
+    pointer-events: none;
+    opacity: 0.8;
 }
 /*toast CSS rule*/
 #appToast {
@@ -247,10 +251,13 @@ md-select:not([disabled]):focus .md-select-value{
     background-color: #fff;
 }
 .inputItem{
-    bottom: 13px;
+    bottom: -1px;
     position: fixed;
-    margin: 1px 8px 8px;
-    z-index:100;
+    margin: 1px 8px -65px;
+    z-index: 100;
+    padding-bottom: 82px;
+    padding-top: 10px;
+    background: #1ABC9C;
 }
 .addBtn{
     margin-top: 0px!important;
@@ -293,6 +300,7 @@ md-select:not([disabled]):focus .md-select-value{
     right: 8px!important;
     background-color: #007bff!important;
     transform: scale(0);
+    z-index: 300!important;
 }
 .cartIco{
     font-size: 1.5em;
@@ -391,15 +399,10 @@ dataSpent{
     float:right;
     margin-right:3%;
 }
-qty{
+.qty{
     float:right;
     margin-right:3%;
-}
-recaplist{
-    border: 2px solid;
-    display: block;
-    border-radius: 8px;
-    margin-top: 5px;
+    display: inline-block;
 }
 .recaplist{
     border: 2px solid;
@@ -407,7 +410,8 @@ recaplist{
     border-radius: 8px;
     margin-top: 5px;
 }
-item{
+.item{
+    display: inline-block;
     margin-left: 5px;
 }
 #recapListPrint{
@@ -440,6 +444,6 @@ close{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.23);
+    background-color: rgba(0, 0, 0, 0.40);
     z-index: 2000;
 }

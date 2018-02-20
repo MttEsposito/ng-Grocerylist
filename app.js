@@ -1,4 +1,4 @@
-angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKookies'])
+angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKookies','ngSanitize'])
   //on run set default page Login 
   .run(["$state", function($state) {
     $state.go('login');

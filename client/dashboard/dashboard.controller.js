@@ -2,7 +2,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
    	angular.element(document).ready(function () {
 			getDataUser();
 		});
-		var isClick=false,myChart,dataY=[],dataX=[],recapPrint=[];
+		let isClick=false,dataY=[],dataX=[],recapPrint=[];
 		function getDataUser(){
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
@@ -11,12 +11,10 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
             method : "GET",
             url : "../../server/get_data_user.php",
             cache:false,
-            params: {
-                timeLine: $scope.dataTime.selectedOptions.data,
-            },
+            params: {timeLine: $scope.dataTime.selectedOptions.data},
             })
             .then(function(res){
-                var item=[],qty=[];
+                let item=[],qty=[];
                 dataY=[],dataX=[],recapPrint=[];
                 $('#loader').addClass('hide');
 		        $('#dataPrinter').removeClass('hide');
@@ -29,7 +27,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
 		        else
 		        {
 		            $('#errorLabel').addClass('hide');
-		           for(var i=0;i<res.data.length;i++)
+		           for(let i=0;i<res.data.length;i++)
                     {
                        dataX.push(res.data[i].data);
                        dataY.push(res.data[i].prezzo);
@@ -41,28 +39,17 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
                        recapPrint.push({item:res.data[i].item,qty:res.data[i].qty,date:res.data[i].data})
                        }
                     }
+                // bind the max spent value
                 $scope.maxSpent = dashSrv.maX(dataY);
+                // bind the min spent value
                 $scope.minSpent = dashSrv.miN(dataY);
+                //bind the avg spent value
                 $scope.averageSpent = dashSrv.avG(dataY);
-                if(myChart != undefined){
-                	myChart.destroy();
+                // create the data chart 
+                dashSrv.chartCreate(dataX,dataY);
+                // bind the crated recap list
+                $scope.recapList = dashSrv.recapList(recapPrint);
                 }
-                chartCreate();
-                var resData="";
-                for(var i=0;i<recapPrint.length;i++)
-                {
-                	if(Array.isArray(recapPrint[i].item)){
-                		resData+="<recaplist><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div>";
-                		for(var j=0;j<recapPrint[i].item.length;j++){
-                		   resData+="<div><item>Item "+recapPrint[i].item[j]+"</item> <qty>Number  "+recapPrint[i].qty[j]+"</qty></div>";
-                		}
-                		resData=resData+"</recaplist>"
-                	}else{
-                	resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div><item>Item "+recapPrint[i].item+"</item> <qty>Number "+recapPrint[i].qty+"</qty></div>";
-                	}
-                }
-                $('#recapListPrint').html(resData);
-		        }
             })
             .catch(function(err){
                $('#loader').addClass('hide');
@@ -89,55 +76,4 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
 		 id: "All", data : "all",
  	 }]
  	 };
- 	 function chartCreate(){
- 		var canvas = document.getElementById('chartPrint');
-    	 var dataChart = 
-    	 {
-    	 	labels: dataX,
-    	 	datasets: 
-    	 	[
-		    	{
-		          label: "Shopping History",
-		          fill: true,
-		          lineTension: 0,
-		          backgroundColor: "rgba(26, 188, 156,0.3)",
-		          borderColor: "#1ABC9C",
-		          pointBorderColor: "#1ABC9C",
-		          pointBorderWidth: 1,
-    			  pointHoverRadius: 5,
-		          pointBackgroundColor: "#fff",
-		          pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				  pointHoverBorderColor: "rgba(220,220,220,1)",
-				  pointHoverBorderWidth: 2,
-				  pointRadius: 6,
-				  pointHitRadius: 7,
-		          data: dataY,
-		        }
-		    ]
-	    };
-	    if(dataX.length>4)
-	    {
-	    	$("xaxes").removeClass('hide')
-	    	var option=
-	        {
-	    		scales:
-            	{
-					xAxes: 
-					[{
-		            	display: false
-		            }]
-                },
-	    	}
-	    }
-	    else
-	    {
-	     $("xaxes").addClass('hide')
-	    }
-		myChart = new Chart(canvas, {
-			type: 'line',
-		    data: dataChart,
-		    options:option,
-		})
- 	 }
- 	
 })
