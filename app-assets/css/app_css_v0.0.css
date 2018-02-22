@@ -318,6 +318,9 @@ md-select:not([disabled]):focus .md-select-value{
     border:0px;
 }
 
+.btn-login-container{
+    padding:9px 0px 9px 0px;
+}
 .modalFooter{
     background-color: #1ABC9C;
     border-bottom-left-radius: 4px;

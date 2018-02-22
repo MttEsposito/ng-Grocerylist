@@ -56,7 +56,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
       })
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){
-         var state = $injector.get('$state');
+         let state = $injector.get('$state');
          if($.cookie('sessionLog')=='set'){
            state.go('dashboard');
          }else{

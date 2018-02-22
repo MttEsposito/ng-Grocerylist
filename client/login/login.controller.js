@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$kookies,$state) {
+angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$kookies,$state,loginSrv) {
     $scope.rgisterUrl = 'http://google.com';
     $scope.sendLogin=function(){
         let emailUser = $('#emailUser').val();
@@ -6,15 +6,8 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
         if(emailUser != "" && passwordUser != ""){
             $('#btnLogin').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
             $('#btnLogin').addClass('disBtn');
-            $http({
-            method : "GET",
-            url : "../../server/login_user.php",
-            cache:false,
-            params: {
-                email: emailUser,
-                password: passwordUser
-            },
-            })
+            let config= {method : "GET",url : "../../server/login_user.php",cache:false,params: {email: emailUser,password: passwordUser}};
+            $http(config)
             .then(function(response) {
                 $('#btnLogin').removeClass('disBtn');
                 $('#btnLogin').html("Login");
@@ -25,46 +18,15 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
                     $('.userName').html($kookies.get('user'));
                     $state.go('grocerylist');
                 }else{
-                    let toast = document.getElementById("appToast");
-                    toast.innerHTML="Incorrect username or password";
-                    toast.className = "show";
-                    setTimeout(function(){
-                    toast.className = toast.className.replace("show", "");
-                    }, 5000);
+                    loginSrv.showToastApp("Incorrect username or password");
                 }
             })
             .catch(function(err){
                     $('#btnLogin').html("Login");
-                    let toast = document.getElementById("appToast");
-                    toast.innerHTML="Something wrong try again later";
-                    toast.className = "show";
-                    setTimeout(function(){
-                    toast.className = toast.className.replace("show", "");
-                    }, 5000);
+                    loginSrv.showToastApp("Something went wrong try again later");
         })
         }else{
-            if(emailUser == "" && passwordUser == ""){
-            $("#emailUser").addClass("errorblankInpt");
-        setTimeout(function () {
-            $('#emailUser').removeClass('errorblankInpt');
-        }, 700);
-        $("#passwordUser").addClass("errorblankInpt");
-        setTimeout(function () {
-            $('#passwordUser').removeClass('errorblankInpt');
-        }, 700);
-        }
-        if(emailUser == ""){
-            $("#emailUser").addClass("errorblankInpt");
-        setTimeout(function () {
-            $('#emailUser').removeClass('errorblankInpt');
-        }, 700);
-        }
-        if(passwordUser == ""){
-            $("#passwordUser").addClass("errorblankInpt");
-        setTimeout(function () {
-            $('#passwordUser').removeClass('errorblankInpt');
-        }, 700);
-        }
+            loginSrv.checkBlankInput(emailUser,passwordUser);
         }
     }
 })

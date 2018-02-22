@@ -2,12 +2,12 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
    //function for appear the complete button  and the recap list
    this.checkCompleteFabButton=function(arrProd){
        let checkAll=null;
-        for(let i=0;i<arrProd.length;i++){
-            if(arrProd[i].check == true){
+        for(let index of arrProd){
+            if(index.check){
                 checkAll++;
             }
         }
-        if(checkAll==arrProd.length){
+        if(checkAll == arrProd.length){
             $('#completeBtn').css('transform','scale(1)');
         }else{
             $('#completeBtn').css('transform','scale(0)');
@@ -36,14 +36,14 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
        let addItemCheck;
         if(arrayItem.length > 0)
             {
-                for(let i=0;i<arrayItem.length;i++)
+                for (let indexOne of arrayItem)
+                {
+                    if(indexOne.item==itemToPush)
                     {
-                        if(arrayItem[i].item==itemToPush)
-                        {
-                            arrayItem[i].numberitem=arrayItem[i].numberitem+1;
-                            addItemCheck=true;
-                        }
+                        indexOne.numberitem=indexOne.numberitem+1;
+                        addItemCheck=true;
                     }
+                }
                     if(!addItemCheck)
                     {
                         arrayItem.push({item:itemToPush,numberitem: 1,check: false});
@@ -55,5 +55,21 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
                     arrayItem.push({item:itemToPush,numberitem: 1, check:false});
                 }
        return arrayItem;
+   }
+   // check blank input on grocery
+   this.blankInput=function(idInput){
+       $("#"+idInput).addClass("errorblankInpt");
+            setTimeout(function () {
+            $("#"+idInput).removeClass('errorblankInpt');
+        }, 1000);
+   }
+   //show the toast app on error input worng email/psw or ajax fail
+   this.showToastApp=function(textToast){
+       let toast = document.getElementById("appToastGro");
+       toast.innerHTML=textToast;
+       toast.className = "show";
+       setTimeout(function(){
+           toast.className = toast.className.replace("show", "");
+       }, 4000);
    }
 })

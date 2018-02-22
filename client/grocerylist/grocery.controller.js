@@ -2,12 +2,9 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
     $scope.products = [];
      $scope.addItem = function () {
         if($("#item").val()==""){
-          $("#item").addClass("errorblankInpt");
-            setTimeout(function () {
-            $('#item').removeClass('errorblankInpt');
-        }, 1000);
+            grocerySrv.blankInput("item");
         }else{
-            $scope.products = grocerySrv.createArrItem($scope.products,$scope.item);
+            $scope.products = grocerySrv.createArrItem($scope.products,$scope.item.toLowerCase());
             }
             $scope.item="";
             grocerySrv.checkCompleteFabButton($scope.products);
@@ -40,11 +37,17 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
         if(totalCurrency!='')
         {
             let totalItem='',totalQty='';
-            for(let i=0;i<$scope.products.length;i++)
-            {
-                totalItem+=$scope.products[i].item + ';'; 
-                totalQty+=$scope.products[i].numberitem + ';'; 
+            // for(let i=0;i<$scope.products.length;i++)
+            // {
+            //     totalItem+=$scope.products[i].item + ';'; 
+            //     totalQty+=$scope.products[i].numberitem + ';'; 
+            // }
+            for(let index of $scope.products){
+                totalItem+=index.item + ';';
+                totalQty+=index.numberitem + ';'; 
             }
+            console.log(totalItem)
+            console.log(totalQty)
             let resItem=totalItem.substring(0, totalItem.length-1);
             let resQty=totalQty.substring(0, totalQty.length-1);
             $('#saveDataBtn').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
@@ -65,42 +68,23 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
                 $('#saveDataBtn').removeClass('disBtn');
                 if(response.data.success=="success"){
                     $('#completeBtn').css('transform','scale(0)');
-                    let toast = document.getElementById("appToastGro");
-                    toast.innerHTML="Data Saved";
-                    toast.className = "show";
-                    setTimeout(function(){
-                    toast.className = toast.className.replace("show", "");
-                    }, 5000);
+                    grocerySrv.showToastApp("Data Saved");
                     $scope.products = [];
                 }else{
-                    let toast = document.getElementById("appToastGro");
-                    toast.innerHTML="Error try again later";
-                    toast.className = "show";
-                    setTimeout(function(){
-                    toast.className = toast.className.replace("show", "");
-                    }, 5000);
+                    grocerySrv.showToastApp("Error try again later");
                 }
             })
             .catch(function(err){
-                let toast = document.getElementById("appToastGro");
-                    toast.innerHTML="Error try again later";
-                    toast.className = "show";
-                    setTimeout(function(){
-                    toast.className = toast.className.replace("show", "");
-                    }, 5000);
+                grocerySrv.showToastApp("Error try again later");
             })
         }
         else
         {
-             $("#totalSpent").addClass("errorblankInpt");
-            setTimeout(function ()
-            {
-                $('#totalSpent').removeClass('errorblankInpt');
-            }, 1000);
+            grocerySrv.blankInput("totalSpent");
         }
     }
     $scope.checkKeyInput=function(keyPress){
-        if(keyPress.which >= 65 && keyPress.which <= 122){ 
+        if((keyPress.which >= 65 && keyPress.which <= 122) || keyPress.which == 8){ 
         }else{
             event.preventDefault(); 
         }
