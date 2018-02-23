@@ -26,7 +26,8 @@ angular.module('nGgroceryList').service('loginSrv', function() {
    }
    //show the toast app on error input worng email/psw or ajax fail
    this.showToastApp=function(textToast){
-       let toast = document.getElementById("appToast");
+       let toast;
+       toast = document.getElementById("appToast");
        toast.innerHTML=textToast;
        toast.className = "show";
        setTimeout(function(){

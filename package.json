@@ -1,6 +1,6 @@
 {
   "name": "ng-grocerylist",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "mobile webapp made in angularjs and converted to mobile with cordova",
   "main": "index.html",
   "author": "Mattia Esposito , Federico Canzi",

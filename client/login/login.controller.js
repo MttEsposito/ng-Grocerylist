@@ -1,12 +1,13 @@
 angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$kookies,$state,loginSrv) {
     $scope.rgisterUrl = 'http://google.com';
     $scope.sendLogin=function(){
-        let emailUser = $('#emailUser').val();
-        let passwordUser = $('#passwordUser').val()
+        let passwordUser,emailUser,config;
+        emailUser = $('#emailUser').val();
+        passwordUser = $('#passwordUser').val();
         if(emailUser != "" && passwordUser != ""){
             $('#btnLogin').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
             $('#btnLogin').addClass('disBtn');
-            let config= {method : "GET",url : "../../server/login_user.php",cache:false,params: {email: emailUser,password: passwordUser}};
+            config= {method : "POST",url : "../../server/login_user.php",cache:false,headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},data: {email: emailUser,password: passwordUser}};
             $http(config)
             .then(function(response) {
                 $('#btnLogin').removeClass('disBtn');

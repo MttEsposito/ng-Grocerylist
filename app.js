@@ -65,7 +65,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
          return $location.path();
     });
   })
-  .directive("userLogOut",function ($http,$kookies,$state) {
+.directive("userLogOut",function ($http,$kookies,$state) {
   return{
     link:function(scope, element, attrs){
         element.click(function(){
@@ -88,21 +88,21 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
     }
   }
   })
-//     .directive("onAppClose",function ($http,$kookies) {
-//   return{
-//     link:function(scope, element, attrs){
-//         window.addEventListener("beforeunload", function(event) {
-//             event.returnValue = "Write something clever here..";
-//             $kookies.set('sessionLog', 'unset');
-//             $kookies.set('user', '');
-//             $http({
-//             cache:false,
-//             method : "GET",
-//             url : "server/logout_user.php",
-//             })
-//             .then(function(response) {
-//             })
-//         })
-//     }
-//   }
-//   })
+.directive("onAppClose",function ($http,$kookies) {
+  return{
+    link:function(scope, element, attrs){
+        window.addEventListener("beforeunload", function(event) {
+            event.returnValue = "Write something clever here..";
+            $kookies.set('sessionLog', 'unset');
+            $kookies.set('user', '');
+            $http({
+            cache:false,
+            method : "GET",
+            url : "server/logout_user.php",
+            })
+            .then(function(response) {
+            })
+        })
+    }
+  }
+  })

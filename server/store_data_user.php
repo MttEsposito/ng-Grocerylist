@@ -3,10 +3,12 @@
 	header("Content-Type: application/json; charset=UTF-8");
 	session_start();
 	include_once 'connect-to-db-app.php';
+	$postData = file_get_contents('php://input');
+	$jsonDataPost = json_decode($postData);
 	$idUser = $_SESSION['app_user_id'];
-	$listItem = $_GET['listitem']; 
-	$qtyItem = $_GET['qtyitem'];
-	$priceTot = $_GET['price'];
+	$listItem = $jsonDataPost -> listitem; 
+	$qtyItem = $jsonDataPost -> qtyitem; 
+	$priceTot = $jsonDataPost -> price;
 	$myDate = date('Y-m-d ');
 	$resultData = new \stdClass();
 	$tableCreate = "CREATE TABLE IF NOT EXISTS user_".$idUser."_data (ID int(255) NOT NULL auto_increment,prezzo double(10,2) NOT NULL,listitem varchar(255) NOT NULL ,qtyitem varchar(255) NOT NULL,date DATE NOT NULL,PRIMARY KEY  (ID))";

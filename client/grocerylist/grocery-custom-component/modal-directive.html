@@ -1,0 +1,22 @@
+    <div id="completeShopping" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content modalComplete">
+          <div class="modal-header modalTitle">
+            <button type="button" class="close modalXBtn" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Shopping done</h4>
+          </div>
+          <div class="modal-body modalBody">
+            <p style="font-size: 15px;">Recap list</p>
+            <ul class="modalList">
+                <li ng-repeat="x in products"><itemrecap>{{x.item}}</itemrecap> <numberrecap>{{x.numberitem}}</numberrecap></li>
+            </ul>
+             <p>Total spent</p>
+              <input id="totalSpent" type="number" class="form-control inputCurrency" placeholder="Enter the total spent of the list..." />
+          </div>
+          <div class="modal-footer modalFooter">
+            <md-button id="saveDataBtn" class="md-raised btnGro" ng-click="saveData()">Save</md-button>
+          </div>
+        </div>
+      </div>
+    </div>
