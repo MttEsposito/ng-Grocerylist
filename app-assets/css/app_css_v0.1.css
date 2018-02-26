@@ -253,11 +253,8 @@ md-select:not([disabled]):focus .md-select-value{
 .inputItem{
     bottom: -1px;
     position: fixed;
-    margin: 1px 8px -65px;
+    margin: 1px 8px 10px;
     z-index: 100;
-    padding-bottom: 82px;
-    padding-top: 10px;
-    background: #1ABC9C;
 }
 .addBtn{
     margin-top: 0px!important;

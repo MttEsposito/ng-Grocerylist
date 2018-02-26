@@ -9,7 +9,7 @@
 	include_once 'connect-to-db-app.php';
 	try{
 		$result = mysqli_query($con, "SELECT * FROM User_app WHERE email = '" .$UserEmail. "' and password = '" .$UserPassword. "'");
-	if ($row = mysqli_fetch_array($result)) {
+		if ($row = mysqli_fetch_array($result)) {
 			$_SESSION['app_user_id'] = $row['userid'];
 			$_SESSION['app_user_name'] = $row['name'];
 			$myObjUser = new \stdClass();

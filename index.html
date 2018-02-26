@@ -12,7 +12,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="app-assets/css/app_css_v0.1.css">
   </head>
-  <body id="bodyApp" ng-app="nGgroceryList" ng-cloak class="bodyBack" onload="clearResource()">
+  <body id="bodyApp" ng-app="nGgroceryList" ng-cloak class="bodyBack" exit-app>
   <!-- Navbar website -->
   <div class="navbarApp">
     <div class="navBarSet">
@@ -29,6 +29,8 @@
   </div>
   <!-- Viewer Content -->
   <div ui-view></div>
+    <!-- Import cordova Library  -->
+    <!--<script type="text/javascript" src="cordova.js"></script>-->
     <!-- Library js dependencies  -->
     <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -43,6 +45,7 @@
     <script type="text/javascript" src="node_modules/ngkookies/ngKookies.min.js"></script>
     <script type="text/javascript" src="node_modules/jquery.cookie/jquery.cookie.js"></script>
     <script type="text/javascript" src="node_modules/chart.js/dist/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-touch/angular-touch.min.js"></script>
     <!-- Import core app js  -->
     <script type="text/javascript" src="app.js"></script>
     <!-- Import controllers js  -->

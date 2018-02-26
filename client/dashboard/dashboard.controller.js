@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$kookies,dashSrv) {
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv) {
    	angular.element(document).ready(function () {
 			getDataUser();
 		});

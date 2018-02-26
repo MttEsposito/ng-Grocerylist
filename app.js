@@ -1,4 +1,4 @@
-angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKookies','ngSanitize'])
+angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKookies','ngSanitize','ngTouch'])
   //on run set default page Login 
   .run(["$state", function($state) {
     $state.go('login');
@@ -91,4 +91,19 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
           }); 
     }
   }
+})
+// directive for clear the app resource on exit
+.directive('exitApp',function($http,$kookies){
+    return{
+        link:function(){
+            window.onbeforeunload = function(){
+                $kookies.set('sessionLog', 'unset');
+                $kookies.set('user', ''); $http({
+                cache:false,
+                method : "GET",
+                url : "server/logout_user.php",
+                }).then(function(response){/*nothing*/});
+            }
+        }
+    }
 })

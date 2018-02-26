@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,$kookies,$state,$timeout,grocerySrv) {
+angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$timeout,grocerySrv) {
     $scope.products = [];
     $scope.addItem = function () {
         if($("#item").val()==""){
