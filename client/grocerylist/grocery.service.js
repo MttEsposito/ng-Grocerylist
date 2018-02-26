@@ -33,12 +33,13 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
    }
    // function for create the array of products
    this.createArrItem=function(arrayItem,itemToPush){
+       let itemClean = itemToPush.replace(/[^a-zA-Z ]/gi, '-');
        let addItemCheck;
         if(arrayItem.length > 0)
             {
                 for (let indexOne of arrayItem)
                 {
-                    if(indexOne.item==itemToPush)
+                    if(indexOne.item==itemClean)
                     {
                         indexOne.numberitem=indexOne.numberitem+1;
                         addItemCheck=true;
@@ -46,13 +47,13 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
                 }
                     if(!addItemCheck)
                     {
-                        arrayItem.push({item:itemToPush,numberitem: 1,check: false});
+                        arrayItem.push({item:itemClean,numberitem: 1,check: false});
                     }
                     addItemCheck=false;
                 }
                 else
                 {
-                    arrayItem.push({item:itemToPush,numberitem: 1, check:false});
+                    arrayItem.push({item:itemClean,numberitem: 1, check:false});
                 }
        return arrayItem;
    }

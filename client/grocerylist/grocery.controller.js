@@ -29,10 +29,8 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$http,
             grocerySrv.chckIt(index,event,$scope.products);
             grocerySrv.checkCompleteFabButton($scope.products);
     }
-    $scope.checkKeyInput=function(keyPress){
-        if((keyPress.which >= 65 && keyPress.which <= 122) || keyPress.which == 8){ 
-        }else{
-            event.preventDefault(); 
-        }
-    }
+    // reset value input on click complete button
+    $('#completeBtn').click(function(){
+        $('#totalSpent').val('');
+    });
 })

@@ -5,6 +5,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
   }])
   //set the routing on the webapp
   .config(function($stateProvider, $urlRouterProvider) {
+    // state app of the login
     $stateProvider
       .state('login', {
         controller: 'loginCtrl',
@@ -13,11 +14,12 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         templateUrl: 'client/login/login.html',
         onEnter: function($state){
          if($.cookie('sessionLog')=='set'){
-           $state.go('dashboard');
+           $state.go('grocerylist');
          }
         },
         onExit: '',
       })
+      // state dashboard for data user
       .state('dashboard', {
         controller: 'dashCtrl',
         controllerAs: 'dashCtrl',
@@ -36,6 +38,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
             $('#dashboard').removeClass('btnTabAct');
         },
       })
+      // state grocerylist core of the app
        .state('grocerylist', {
         controller: 'groceryCtrl',
         controllerAs: 'groceryCtrl',
@@ -58,13 +61,14 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
       $urlRouterProvider.otherwise(function($injector, $location){
          let state = $injector.get('$state');
          if($.cookie('sessionLog')=='set'){
-           state.go('dashboard');
+           state.go('grocerylist');
          }else{
            state.go('login');
          }
          return $location.path();
     });
   })
+  //directive function for the logout button in the navbar
 .directive("userLogOut",function ($http,$kookies,$state) {
   return{
     link:function(scope, element, attrs){
@@ -87,22 +91,4 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
           }); 
     }
   }
-  })
-.directive("onAppClose",function ($http,$kookies) {
-  return{
-    link:function(scope, element, attrs){
-        window.addEventListener("beforeunload", function(event) {
-            event.returnValue = "Write something clever here..";
-            $kookies.set('sessionLog', 'unset');
-            $kookies.set('user', '');
-            $http({
-            cache:false,
-            method : "GET",
-            url : "server/logout_user.php",
-            })
-            .then(function(response) {
-            })
-        })
-    }
-  }
-  })
+})
