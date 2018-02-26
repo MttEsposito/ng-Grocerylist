@@ -75,22 +75,18 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         element.click(function(){
             if($kookies.get('sessionLog')=="set"){
                 $('body').append("<close><center><div class='loader'></div><center></close>");
-            $http({
-            cache:false,
-            method : "GET",
-            url : "server/logout_user.php",
-            })
-            .then(function(response) {
-                $(".navbarApp").css("display","none"); 
-                $kookies.set('sessionLog', 'unset');
-                $kookies.set('user', '');
-                $state.go('login');
-                $('close').remove();
-            })
+                setTimeout(function(){
+                    $(".navbarApp").css("display","none"); 
+                    $kookies.set('sessionLog', 'unset');
+                    $kookies.set('user', '');
+                    $kookies.set('userId', '');
+                    $state.go('login');
+                    $('close').remove();
+                },1500)
             }
           }); 
+        }
     }
-  }
 })
 // directive for clear the app resource on exit
 .directive('exitApp',function($http,$kookies){
@@ -98,11 +94,8 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         link:function(){
             window.onbeforeunload = function(){
                 $kookies.set('sessionLog', 'unset');
-                $kookies.set('user', ''); $http({
-                cache:false,
-                method : "GET",
-                url : "server/logout_user.php",
-                }).then(function(response){/*nothing*/});
+                $kookies.set('user', '');
+                $kookies.set('userId', '');
             }
         }
     }

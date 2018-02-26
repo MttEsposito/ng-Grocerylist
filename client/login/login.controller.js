@@ -13,8 +13,10 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
                 $('#btnLogin').removeClass('disBtn');
                 $('#btnLogin').html("Login");
                 if(response.data.userid!="error"){
+                    console.log(response)
                     $kookies.set('sessionLog', 'set');
                     $kookies.set('user', response.data.name);
+                    $kookies.set('userId', response.data.userid);
                     $(".navbarApp").slideDown("slow");
                     $('.userName').html($kookies.get('user'));
                     $state.go('grocerylist');

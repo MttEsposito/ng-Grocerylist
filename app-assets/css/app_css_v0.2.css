@@ -427,9 +427,9 @@ dataSpent{
     margin-bottom: -9px;
     color: #fff;
 }
- @media (min-width: 650px) {
+ @media (min-width: 600px) {
     .shoppList {
-        max-height: 186px;
+        max-height: 186px!important;
     }
     .modalList{
         max-height: 100px;

@@ -1,9 +1,8 @@
 <?php
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
-	session_start();
 	include_once 'connect-to-db-app.php';
-	$idUser = $_SESSION['app_user_id'];
+	$idUser = $_GET['userId'];
 	$timeLine = $_GET['timeLine'];
 	$resultData = new \stdClass();
 		switch($timeLine)

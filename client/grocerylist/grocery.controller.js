@@ -10,7 +10,7 @@ angular.module('nGgroceryList').controller('groceryCtrl', function($scope,$timeo
             grocerySrv.checkCompleteFabButton($scope.products);
             $('#item').focus();
             $timeout(function() {
-              $("#groceryListPrint").scrollTop($("#groceryListPrint")[0].scrollHeight);
+                $("#groceryListPrint").animate({ scrollTop: ($("#groceryListPrint")[0].scrollHeight) }, 700);
             }, 0, false);
     }
     $scope.removeItem = function (index) {

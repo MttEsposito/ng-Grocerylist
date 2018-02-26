@@ -1,11 +1,10 @@
 <?php
 	header("Access-Control-Allow-Origin: *");
 	header("Content-Type: application/json; charset=UTF-8");
-	session_start();
 	include_once 'connect-to-db-app.php';
 	$postData = file_get_contents('php://input');
 	$jsonDataPost = json_decode($postData);
-	$idUser = $_SESSION['app_user_id'];
+	$idUser = $jsonDataPost -> userId; 
 	$listItem = $jsonDataPost -> listitem; 
 	$qtyItem = $jsonDataPost -> qtyitem; 
 	$priceTot = $jsonDataPost -> price;
