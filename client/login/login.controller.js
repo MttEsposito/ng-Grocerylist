@@ -11,7 +11,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
             $http(config)
             .then(function(response) {
                 $('#btnLogin').removeClass('disBtn');
-                $('#btnLogin').html("Login");
+                $('#btnLogin').html("Sign in");
                 if(response.data.userid!="error"){
                     console.log(response)
                     $kookies.set('sessionLog', 'set');

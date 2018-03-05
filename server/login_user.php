@@ -7,7 +7,7 @@
 	$UserPassword = $jsonDataPost -> password; 
 	include_once 'connect-to-db-app.php';
 	try{
-		$result = mysqli_query($con, "SELECT * FROM User_app WHERE email = '" .$UserEmail. "' and password = '" .$UserPassword. "'");
+		$result = mysqli_query($con, "SELECT email,password,name,userid FROM User_app WHERE email = '" .$UserEmail. "' and password = '" .$UserPassword. "'");
 		if ($row = mysqli_fetch_array($result)) {
 			$myObjUser = new \stdClass();
 			$myObjUser->userid = $row['userid'];

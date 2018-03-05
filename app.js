@@ -69,27 +69,25 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
     });
   })
   //directive function for the logout button in the navbar
-.directive("userLogOut",function ($http,$kookies,$state) {
+.directive("userLogOut",function ($kookies,$state) {
   return{
     link:function(scope, element, attrs){
         element.click(function(){
-            if($kookies.get('sessionLog')=="set"){
                 $('body').append("<close><center><div class='loader'></div><center></close>");
+                $kookies.set('sessionLog', 'unset');
+                $kookies.set('user', '');
+                $kookies.set('userId', '');
                 setTimeout(function(){
-                    $(".navbarApp").css("display","none"); 
-                    $kookies.set('sessionLog', 'unset');
-                    $kookies.set('user', '');
-                    $kookies.set('userId', '');
+                    $(".navbarApp").css("display","none");
                     $state.go('login');
                     $('close').remove();
                 },1500)
-            }
           }); 
         }
     }
 })
 // directive for clear the app resource on exit
-.directive('exitApp',function($http,$kookies){
+.directive('exitApp',function($kookies){
     return{
         link:function(){
             window.onbeforeunload = function(){
