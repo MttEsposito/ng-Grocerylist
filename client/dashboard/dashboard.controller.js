@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$kookies,dashSrv) {
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv) {
    	angular.element(document).ready(function () {
 			getDataUser();
 		});
@@ -7,14 +7,9 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,$ko
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
 		    $('#errorLabel').addClass('hide');
-		    $http({
-            method : "GET",
-            url : "../../server/get_data_user.php",
-            cache:false,
-            params: {timeLine: $scope.dataTime.selectedOptions.data,userId:$kookies.get('userId')},
-            })
+		    let config={method : "GET",url : "../../server/get_data_user.php",cache:false,params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}};
+		    $http(config)
             .then(function(res){
-                console.log(res)
                 let item=[],qty=[];
                 dataY=[],dataX=[],recapPrint=[];
                 $('#loader').addClass('hide');

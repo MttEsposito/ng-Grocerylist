@@ -1,8 +1,4 @@
-angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKookies','ngSanitize','ngTouch'])
-  //on run set default page Login 
-  .run(["$state", function($state) {
-    $state.go('login');
-  }])
+angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSanitize'])
   //set the routing on the webapp
   .config(function($stateProvider, $urlRouterProvider) {
     // state app of the login
@@ -10,12 +6,12 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
       .state('login', {
         controller: 'loginCtrl',
         controllerAs: 'loginCtrl',
-        url: '/login',
+        url: '/',
         templateUrl: 'client/login/login.html',
         onEnter: function($state){
-         if($.cookie('sessionLog')=='set'){
-           $state.go('grocerylist');
-         }
+            if(window.localStorage.getItem("sessionLog")=='set'){
+                $state.go('grocerylist')
+            }
         },
         onExit: '',
       })
@@ -26,11 +22,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         url: '/dashboard',
         templateUrl: 'client/dashboard/dashboard.html',
         onEnter: function($state){
-         if($.cookie('sessionLog')!='set'){
+         if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
              $(".navbarApp").css("display","block");
-             $('.userName').html($.cookie('user'))
+             $('.userName').html(window.localStorage.getItem("user"))
          }
          $('#dashboard').addClass('btnTabAct');
         },
@@ -45,11 +41,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
         url: '/grocerylist',
         templateUrl: 'client/grocerylist/grocery.html',
         onEnter: function($state){
-         if($.cookie('sessionLog')!='set'){
+         if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
              $(".navbarApp").css("display","block");
-             $('.userName').html($.cookie('user'))
+             $('.userName').html(window.localStorage.getItem("user"))
          }
          $('#grocery').addClass('btnTabAct');
         },
@@ -59,42 +55,30 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngKoo
       })
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){
-         let state = $injector.get('$state');
-         if($.cookie('sessionLog')=='set'){
-           state.go('grocerylist');
-         }else{
-           state.go('login');
-         }
-         return $location.path();
+        let state = $injector.get('$state');
+          if(window.localStorage.getItem("sessionLog")=='set'){
+            $location.path('/grocerylist');
+          }else{
+            $location.path('/');
+          }
+          return $location.path();
     });
   })
-  //directive function for the logout button in the navbar
-.directive("userLogOut",function ($kookies,$state) {
+//directive function for the logout button in the navbar
+.directive("userLogOut",function ($state) {
   return{
     link:function(scope, element, attrs){
         element.click(function(){
                 $('body').append("<close><center><div class='loader'></div><center></close>");
-                $kookies.set('sessionLog', 'unset');
-                $kookies.set('user', '');
-                $kookies.set('userId', '');
+                window.localStorage.removeItem("user");
+                window.localStorage.removeItem("userId");
+                window.localStorage.setItem('sessionLog', 'unset');
                 setTimeout(function(){
                     $(".navbarApp").css("display","none");
                     $state.go('login');
                     $('close').remove();
                 },1500)
           }); 
-        }
-    }
-})
-// directive for clear the app resource on exit
-.directive('exitApp',function($kookies){
-    return{
-        link:function(){
-            window.onbeforeunload = function(){
-                $kookies.set('sessionLog', 'unset');
-                $kookies.set('user', '');
-                $kookies.set('userId', '');
-            }
         }
     }
 })

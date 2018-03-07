@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$kookies,$state,loginSrv) {
+angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$state,loginSrv) {
     $scope.rgisterUrl = 'http://google.com';
     $scope.sendLogin=function(){
         let passwordUser,emailUser,config;
@@ -13,12 +13,12 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$k
                 $('#btnLogin').removeClass('disBtn');
                 $('#btnLogin').html("Sign in");
                 if(response.data.userid!="error"){
-                    console.log(response)
-                    $kookies.set('sessionLog', 'set');
-                    $kookies.set('user', response.data.name);
-                    $kookies.set('userId', response.data.userid);
+                    let appStorage = window.localStorage;
+                    appStorage.setItem('sessionLog', 'set');
+                    appStorage.setItem('user', response.data.name);
+                    appStorage.setItem('userId', response.data.userid);
                     $(".navbarApp").slideDown("slow");
-                    $('.userName').html($kookies.get('user'));
+                    $('.userName').html(appStorage.getItem('user'));
                     $state.go('grocerylist');
                 }else{
                     loginSrv.showToastApp("Incorrect username or password");
