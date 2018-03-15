@@ -4,9 +4,9 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
     // state app of the login
     $stateProvider
       .state('login', {
+        url: '/',
         controller: 'loginCtrl',
         controllerAs: 'loginCtrl',
-        url: '/',
         templateUrl: 'client/login/login.html',
         onEnter: function($state){
             if(window.localStorage.getItem("sessionLog")=='set'){
@@ -17,41 +17,35 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
       })
       // state dashboard for data user
       .state('dashboard', {
+        url: '/dashboard',
         controller: 'dashCtrl',
         controllerAs: 'dashCtrl',
-        url: '/dashboard',
         templateUrl: 'client/dashboard/dashboard.html',
         onEnter: function($state){
          if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
              $(".navbarApp").css("display","block");
-             $('.userName').html(window.localStorage.getItem("user"))
+             $('.userName').html(window.localStorage.getItem("user"));
          }
-         $('#dashboard').addClass('btnTabAct');
         },
-        onExit: function(){
-            $('#dashboard').removeClass('btnTabAct');
-        },
+        onExit: '',
       })
       // state grocerylist core of the app
        .state('grocerylist', {
+        url: '/grocerylist',
         controller: 'groceryCtrl',
         controllerAs: 'groceryCtrl',
-        url: '/grocerylist',
         templateUrl: 'client/grocerylist/grocery.html',
         onEnter: function($state){
          if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
              $(".navbarApp").css("display","block");
-             $('.userName').html(window.localStorage.getItem("user"))
+             $('.userName').html(window.localStorage.getItem("user"));
          }
-         $('#grocery').addClass('btnTabAct');
         },
-        onExit: function(){
-            $('#grocery').removeClass('btnTabAct');
-        },
+        onExit: '',
       })
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){

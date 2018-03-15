@@ -4,6 +4,9 @@
 	include_once 'connect-to-db-app.php';
 	$idUser = $_GET['userId'];
 	$timeLine = $_GET['timeLine'];
+	if($timeLine == ''){
+		$timeLine="all";
+	}
 	$resultData = new \stdClass();
 		switch($timeLine)
 		{
@@ -40,10 +43,10 @@
 						$dataArr['item'] = $row['listitem'];
 						$dataArr['qty'] = $row['qtyitem'];
 						$dataArr['data'] = $row['date'];
-						$props[] = $dataArr;
+						$resultDataUser[] = $dataArr;
         			}
 						mysqli_close($con);
-						$myJson = json_encode($props);
+						$myJson = json_encode($resultDataUser);
 						echo $myJson;
 				}
 			else

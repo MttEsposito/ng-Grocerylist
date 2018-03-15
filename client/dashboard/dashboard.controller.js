@@ -1,9 +1,6 @@
 angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv) {
-   	angular.element(document).ready(function () {
-			getDataUser();
-		});
 		let isClick=false,dataY=[],dataX=[],recapPrint=[];
-		function getDataUser(){
+		$scope.getDataUser=function(){
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
 		    $('#errorLabel').addClass('hide');
@@ -56,7 +53,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
 		}
 	$scope.updateData=function(){
 	    if(isClick){
-	        getDataUser();
+	        $scope.getDataUser();
 	    }
 	}
 	$scope.checkClick=function(){
