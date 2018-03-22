@@ -1,17 +1,23 @@
-angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$state,loginSrv) {
-    $scope.rgisterUrl = 'http://google.com';
+angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$state,loginSrv,appCostants) {
+    $scope.rgisterUrl = appCostants.websiteUrl;
     $scope.sendLogin=function(){
         let passwordUser,emailUser,config;
         emailUser = $('#emailUser').val();
         passwordUser = $('#passwordUser').val();
         if(emailUser != "" && passwordUser != ""){
-            $('#btnLogin').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
+            $('#btnLogin').html(appCostants.loaderIconBtn);
             $('#btnLogin').addClass('disBtn');
-            config= {method : "POST",url : "../../server/login_user.php",cache:false,headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},data: {email: emailUser,password: passwordUser}};
-            $http(config)
-            .then(function(response) {
+            config = {
+                method : "POST",
+                url : appCostants.loginServerUrl,
+                cache:false,
+                headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
+                data: {email: emailUser,password: passwordUser}
+            };
+            loginSrv.loginExec(config)
+            .then(function(response){
                 $('#btnLogin').removeClass('disBtn');
-                $('#btnLogin').html("Sign in");
+                $('#btnLogin').html(appCostants.loginDefault);
                 if(response.data.userid!="error"){
                     let appStorage = window.localStorage;
                     appStorage.setItem('sessionLog', 'set');
@@ -21,13 +27,14 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$http,$s
                     $('.userName').html(appStorage.getItem('user'));
                     $state.go('grocerylist');
                 }else{
-                    loginSrv.showToastApp("Incorrect username or password");
+                    loginSrv.showToastApp(appCostants.toastLoginIncorrect);
                 }
             })
-            .catch(function(err){
-                    $('#btnLogin').html("Login");
-                    loginSrv.showToastApp("Something went wrong try again later");
-        })
+            .catch(function(fail){
+                $('#btnLogin').html(appCostants.loginDefault);
+                loginSrv.showToastApp(appCostants.toastLoginError);
+
+            });
         }else{
             loginSrv.checkBlankInput(emailUser,passwordUser);
         }
