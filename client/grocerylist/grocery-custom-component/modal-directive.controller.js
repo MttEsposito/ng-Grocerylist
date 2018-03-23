@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,grocerySrv,appCostants,modalGrocerySrv){
+angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,grocerySrv,appCostants,modalGrocerySrv,ajaxSrv){
         $scope.saveData=function(){
         let totalCurrency=$('#totalSpent').val();
         if(totalCurrency!='')
@@ -18,21 +18,21 @@ angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,gro
                 cache:false,
                 data: {listitem: resItem,qtyitem: resQty,price:totalCurrency,userId:window.localStorage.getItem('userId')}
             };
-            modalGrocerySrv.storeDataGrocery(config)
+            ajaxSrv.execAjax(config)
             .then(function(response){
                 $('#completeShopping').modal('hide');
                 modalGrocerySrv.btnStoreDataEvent(1)
                 if(response.data.success=="success"){
                     $('#completeBtn').css('transform','scale(0)');
-                    grocerySrv.showToastApp(appCostants.toastSaveSuccess);
+                    modalGrocerySrv.showToastApp(appCostants.toastSaveSuccess);
                     $scope.products = [];
                 }else{
-                    grocerySrv.showToastApp(appCostants.toastSaveError);
+                    modalGrocerySrv.showToastApp(appCostants.toastSaveError);
                 }
             })
             .catch(function(err){
                 modalGrocerySrv.btnStoreDataEvent(1)
-                grocerySrv.showToastApp(appCostants.toastSaveError);
+                modalGrocerySrv.showToastApp(appCostants.toastSaveError);
             })
         }
         else

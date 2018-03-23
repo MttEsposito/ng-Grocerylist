@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$state,loginSrv,appCostants) {
+angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$state,loginSrv,appCostants,ajaxSrv) {
     $scope.rgisterUrl = appCostants.websiteUrl;
     $scope.sendLogin=function(){
         let passwordUser,emailUser,config;
@@ -14,7 +14,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$stat
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
                 data: {email: emailUser,password: passwordUser}
             };
-            loginSrv.loginExec(config)
+            ajaxSrv.execAjax(config)
             .then(function(response){
                 loginSrv.btnSignInEvent(1);
                 if(response.data.userid!="error"){

@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv,appCostants) {
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv,appCostants,ajaxSrv) {
 		let isClick=false,dataY=[],dataX=[],recapPrint=[];
 		$scope.getDataUser=function(){
 		    $('#loader').removeClass('hide');
@@ -10,7 +10,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
 		        cache:false,
 		        params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}
 		    };
-		    dashSrv.dashGetExec(config)
+		    ajaxSrv.execAjax(config)
             .then(function(res){
                 let item=[],qty=[];
                 dataY=[],dataX=[],recapPrint=[];

@@ -1,22 +1,4 @@
-angular.module('nGgroceryList').service('modalGrocerySrv', function($http,$q,appCostants) {
-    //function for exec the login 
-    this.storeDataGrocery=function(configHttp){
-        let config=configHttp;
-        return $q(function(resolve,reject){
-            let startAjaxCall=function(){
-                $http(config)
-                .then(successResult)
-                .catch(failResult)
-            };
-            let successResult=function(res){
-                resolve(res);
-            };
-            let failResult=function(err){
-                reject(err);
-            };
-            startAjaxCall();
-        });
-   }
+angular.module('nGgroceryList').service('modalGrocerySrv', function(appCostants) {
     //show the toast app on error input worng email/psw or ajax fail
     this.showToastApp=function(textToast){
        let toast = document.getElementById("appToastGro");

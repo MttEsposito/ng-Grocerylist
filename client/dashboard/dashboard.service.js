@@ -1,23 +1,5 @@
-angular.module('nGgroceryList').service('dashSrv', function($http,$q) {
+angular.module('nGgroceryList').service('dashSrv', function() {
     let myChart;
-    //function for exec the login 
-	this.dashGetExec=function(configHttp){
-        let config=configHttp;
-        return $q(function(resolve,reject){
-            let startAjaxCall=function(){
-                $http(config)
-                .then(successResult)
-                .catch(failResult)
-            };
-            let successResult=function(res){
-                resolve(res);
-            };
-            let failResult=function(err){
-                reject(err);
-            };
-            startAjaxCall();
-        });
-    }
     //function for get the max price spent
     this.maX = function (dataArrayPrice) { 
         return (Math.max.apply(null,dataArrayPrice.map(Number))).toFixed(2);
