@@ -1,6 +1,5 @@
 <?php
     // function for send an email when the query fail
-	
 	$to = '';
     $subject = "Query fail on $pageFail";
     $htmlContent = "
