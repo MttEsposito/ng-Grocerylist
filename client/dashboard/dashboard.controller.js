@@ -1,11 +1,16 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv) {
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv,appCostants) {
 		let isClick=false,dataY=[],dataX=[],recapPrint=[];
 		$scope.getDataUser=function(){
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
 		    $('#errorLabel').addClass('hide');
-		    let config={method : "GET",url : "../../server/get_data_user.php",cache:false,params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}};
-		    $http(config)
+		    let config={
+		        method : "GET",
+		        url : appCostants.dashboardServerUrl,
+		        cache:false,
+		        params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}
+		    };
+		    dashSrv.dashGetExec(config)
             .then(function(res){
                 let item=[],qty=[];
                 dataY=[],dataX=[],recapPrint=[];
@@ -15,7 +20,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
 		        {
 		            $('#dataPrinter').addClass('hide');
 		            $('#errorLabel').removeClass('hide');
-		            $('#errorLabel').html("No data saved yet!");
+		            $('#errorLabel').html(appCostants.dashboardError);
 		        }
 		        else
 		        {
@@ -48,7 +53,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
                $('#loader').addClass('hide');
                $('#errorLabel').removeClass('hide');
                $('#dataPrinter').addClass('hide');
-               $('#errorLabel').html("Ups! an error occured <i class='fa fa-frown-o'></i> <br> Try again later"); 
+               $('#errorLabel').html(appCostants.dashboardFail); 
             })
 		}
 	$scope.updateData=function(){

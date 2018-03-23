@@ -57,22 +57,4 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
           }
           return $location.path();
     });
-  })
-//directive function for the logout button in the navbar
-.directive("userLogOut",function ($state) {
-  return{
-    link:function(scope, element, attrs){
-        element.click(function(){
-                $('body').append("<close><center><div class='loader'></div><center></close>");
-                window.localStorage.removeItem("user");
-                window.localStorage.removeItem("userId");
-                window.localStorage.setItem('sessionLog', 'unset');
-                setTimeout(function(){
-                    $(".navbarApp").css("display","none");
-                    $state.go('login');
-                    $('close').remove();
-                },1500)
-          }); 
-        }
-    }
-})
+});

@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,grocerySrv){
+angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,grocerySrv,appCostants,modalGrocerySrv){
         $scope.saveData=function(){
         let totalCurrency=$('#totalSpent').val();
         if(totalCurrency!='')
@@ -10,24 +10,29 @@ angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,gro
             }
             let resItem=totalItem.substring(0, totalItem.length-1);
             let resQty=totalQty.substring(0, totalQty.length-1);
-            $('#saveDataBtn').html("<i class='fa fa-lg fa-spinner fa-spin'></i>");
-            $('#saveDataBtn').addClass('disBtn');
-            let config={ method : "POST",url : "../../server/store_data_user.php",headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},cache:false,data: {listitem: resItem,qtyitem: resQty,price:totalCurrency,userId:window.localStorage.getItem('userId')} };
-            $http(config)
+            modalGrocerySrv.btnStoreDataEvent(0)
+            let config={ 
+                method : "POST",
+                url : appCostants.groceryServerUrl,
+                headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
+                cache:false,
+                data: {listitem: resItem,qtyitem: resQty,price:totalCurrency,userId:window.localStorage.getItem('userId')}
+            };
+            modalGrocerySrv.storeDataGrocery(config)
             .then(function(response){
                 $('#completeShopping').modal('hide');
-                $('#saveDataBtn').html("Save");
-                $('#saveDataBtn').removeClass('disBtn');
+                modalGrocerySrv.btnStoreDataEvent(1)
                 if(response.data.success=="success"){
                     $('#completeBtn').css('transform','scale(0)');
-                    grocerySrv.showToastApp("Data Saved");
+                    grocerySrv.showToastApp(appCostants.toastSaveSuccess);
                     $scope.products = [];
                 }else{
-                    grocerySrv.showToastApp("Error try again later");
+                    grocerySrv.showToastApp(appCostants.toastSaveError);
                 }
             })
             .catch(function(err){
-                grocerySrv.showToastApp("Error try again later");
+                modalGrocerySrv.btnStoreDataEvent(1)
+                grocerySrv.showToastApp(appCostants.toastSaveError);
             })
         }
         else

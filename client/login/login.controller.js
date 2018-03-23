@@ -5,8 +5,8 @@ angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$stat
         emailUser = $('#emailUser').val();
         passwordUser = $('#passwordUser').val();
         if(emailUser != "" && passwordUser != ""){
-            $('#btnLogin').html(appCostants.loaderIconBtn);
-            $('#btnLogin').addClass('disBtn');
+            loginSrv.btnSignInEvent(0);
+            
             config = {
                 method : "POST",
                 url : appCostants.loginServerUrl,
@@ -16,8 +16,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$stat
             };
             loginSrv.loginExec(config)
             .then(function(response){
-                $('#btnLogin').removeClass('disBtn');
-                $('#btnLogin').html(appCostants.loginDefault);
+                loginSrv.btnSignInEvent(1);
                 if(response.data.userid!="error"){
                     let appStorage = window.localStorage;
                     appStorage.setItem('sessionLog', 'set');
@@ -31,7 +30,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$stat
                 }
             })
             .catch(function(fail){
-                $('#btnLogin').html(appCostants.loginDefault);
+                loginSrv.btnSignInEvent(1);
                 loginSrv.showToastApp(appCostants.toastLoginError);
 
             });

@@ -1,13 +1,31 @@
-angular.module('nGgroceryList').service('dashSrv', function() {
+angular.module('nGgroceryList').service('dashSrv', function($http,$q) {
     let myChart;
+    //function for exec the login 
+	this.dashGetExec=function(configHttp){
+        let config=configHttp;
+        return $q(function(resolve,reject){
+            let startAjaxCall=function(){
+                $http(config)
+                .then(successResult)
+                .catch(failResult)
+            };
+            let successResult=function(res){
+                resolve(res);
+            };
+            let failResult=function(err){
+                reject(err);
+            };
+            startAjaxCall();
+        });
+    }
     //function for get the max price spent
     this.maX = function (dataArrayPrice) { 
         return (Math.max.apply(null,dataArrayPrice.map(Number))).toFixed(2);
-    };
+    }
     // function for get the min price spent
     this.miN= function(dataArrayPrice){
         return (Math.min.apply(null,dataArrayPrice.map(Number))).toFixed(2);
-    };
+    }
     //function for get the average price spent
     this.avG=function(dataArrayPrice){
         return (dataArrayPrice.map(Number).reduce((a, b) => a + b, 0)/dataArrayPrice.map(Number).length).toFixed(2);

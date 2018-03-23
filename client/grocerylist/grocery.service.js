@@ -64,13 +64,4 @@ angular.module('nGgroceryList').service('grocerySrv', function() {
             $("#"+idInput).removeClass('errorblankInpt');
         }, 1000);
    }
-   //show the toast app on error input worng email/psw or ajax fail
-   this.showToastApp=function(textToast){
-       let toast = document.getElementById("appToastGro");
-       toast.innerHTML=textToast;
-       toast.className = "show";
-       setTimeout(function(){
-           toast.className = toast.className.replace("show", "");
-       }, 4000);
-   }
 })
