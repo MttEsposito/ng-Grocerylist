@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('loginCtrl', function($q,$scope,$state,loginSrv,appCostants,ajaxSrv) {
+angular.module('nGgroceryList').controller('loginCtrl', function($scope,$state,loginSrv,appCostants,ajaxSrv) {
     $scope.rgisterUrl = appCostants.websiteUrl;
     $scope.sendLogin=function(){
         let passwordUser,emailUser,config;

@@ -1,4 +1,4 @@
-angular.module('nGgroceryList').controller('modalCtrl',function($scope,$http,grocerySrv,appCostants,modalGrocerySrv,ajaxSrv){
+angular.module('nGgroceryList').controller('modalCtrl',function($scope,grocerySrv,appCostants,modalGrocerySrv,ajaxSrv){
         $scope.saveData=function(){
         let totalCurrency=$('#totalSpent').val();
         if(totalCurrency!='')

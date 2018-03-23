@@ -1,5 +1,5 @@
 angular.module('nGgroceryList').service('ajaxSrv', function($http,$q) {
-    //function for exec the login 
+    //function for made httpcall
 	this.execAjax=function(configHttp){
         let config=configHttp;
         return $q(function(resolve,reject){
