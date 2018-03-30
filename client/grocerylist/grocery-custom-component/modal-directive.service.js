@@ -11,11 +11,9 @@ angular.module('nGgroceryList').service('modalGrocerySrv', function(appCostants)
    //set enable disable button save on click
    this.btnStoreDataEvent=function(number){
        if(number== 0){
-           $('#saveDataBtn').html(appCostants.loaderIconBtn);
-           $('#saveDataBtn').addClass('disBtn');
+           $('#saveDataBtn').html(appCostants.loaderIconBtn).addClass('disBtn');
        }else{
-           $('#saveDataBtn').removeClass('disBtn');
-           $('#saveDataBtn').html(appCostants.saveDataBtnDefault);
+           $('#saveDataBtn').html(appCostants.saveDataBtnDefault).removeClass('disBtn');
        }
    }
 

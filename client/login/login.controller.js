@@ -6,7 +6,6 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$state,l
         passwordUser = $('#passwordUser').val();
         if(emailUser != "" && passwordUser != ""){
             loginSrv.btnSignInEvent(0);
-            
             config = {
                 method : "POST",
                 url : appCostants.loginServerUrl,

@@ -49,11 +49,9 @@ angular.module('nGgroceryList').service('loginSrv', function(appCostants) {
    //set enable disable button signin on click
    this.btnSignInEvent=function(number){
        if(number== 0){
-           $('#btnLogin').html(appCostants.loaderIconBtn);
-           $('#btnLogin').addClass('disBtn');
+           $('#btnLogin').html(appCostants.loaderIconBtn).addClass('disBtn');
        }else{
-           $('#btnLogin').removeClass('disBtn');
-           $('#btnLogin').html(appCostants.loginDefault);
+           $('#btnLogin').html(appCostants.loginDefault).removeClass('disBtn');
        }
    }
 })
