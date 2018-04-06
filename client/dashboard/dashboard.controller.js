@@ -25,17 +25,28 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
 		        else
 		        {
 		            $('#errorLabel').addClass('hide');
-		           for(let i=0;i<res.data.length;i++)
+                    for (let index of res.data)
                     {
-                       dataX.push(res.data[i].data);
-                       dataY.push(res.data[i].prezzo);
-                       item.push(res.data[i].item);
-                       qty.push(res.data[i].qty);
-                       if(res.data[i].item.includes(";")){
-                       recapPrint.push({item:res.data[i].item.split(";"),qty:res.data[i].qty.split(";"),date:res.data[i].data})
-                       }else{
-                       recapPrint.push({item:res.data[i].item,qty:res.data[i].qty,date:res.data[i].data})
-                       }
+                        dataX.push(index.data);
+                        dataY.push(index.prezzo);
+                        item.push(index.item);
+                        qty.push(index.qty);
+                        if(index.item.includes(";"))
+                        {
+                            recapPrint.push({
+                                item:index.item.split(";"),
+                                qty:index.qty.split(";"),
+                                date:index.data
+                            });
+                        }
+                        else
+                        {
+                            recapPrint.push({
+                                item:index.item,
+                                qty:index.qty,
+                                date:index.data
+                            });
+                        }
                     }
                 // bind the max spent value
                 $scope.maxSpent = dashSrv.maX(dataY);

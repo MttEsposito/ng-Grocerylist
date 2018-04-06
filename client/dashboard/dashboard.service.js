@@ -15,17 +15,22 @@ angular.module('nGgroceryList').service('dashSrv', function() {
     // function for create the recap list in the dashboard
     this.recapList=function(recapPrint){
         let resData="";
-        for(let i=0;i<recapPrint.length;i++)
+        	for (let index of recapPrint)
             {
-                if(Array.isArray(recapPrint[i].item)){
-                    resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div>";
-                        for(let j=0;j<recapPrint[i].item.length;j++){
-                		   resData+="<div><div class='item'>Item "+recapPrint[i].item[j]+"</div><div class='qty'>Number  "+recapPrint[i].qty[j]+"</div></div>";
-                		}
-                	resData=resData+"</div>"
-                }else{
-                	resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+recapPrint[i].date+"</div><div class='item'>Item "+recapPrint[i].item+"</div> <div class='qty'>Number "+recapPrint[i].qty+"</div></div>";
-                	}
+            	if(Array.isArray(index.item))
+            	{
+            		resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+index.date+"</div>";
+            			let subIndexLen=index.item.length
+	            		for(let i=0;i<subIndexLen;i++)
+	            		{	
+	            			resData+="<div><div class='item'>Item "+index.item[i]+"</div><div class='qty'>Number  "+index.qty[i]+"</div></div>";
+	            		}
+            		resData=resData+"</div>";
+            	}else
+            	{
+            		resData+="<div class='recaplist'><div class='groDate'>Grocery list date : "+index.date+"</div><div class='item'>Item "+index.item+"</div> <div class='qty'>Number "+index.qty+"</div></div>";
+            	}
+            
             }
         return resData;
     }
