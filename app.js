@@ -25,8 +25,10 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
          if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
-             $(".navbarApp").css("display","block");
-             $('.userName').html(window.localStorage.getItem("user"));
+            $(".navbarApp").css("display","block");
+            $('.userName').html(window.localStorage.getItem("user"));
+            $('.navTab').find('.btnTabAct').removeClass('btnTabAct');
+            $('#dashboard').addClass('btnTabAct');
          }
         },
         onExit: '',
@@ -41,8 +43,10 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
          if(window.localStorage.getItem("sessionLog")!='set'){
            $state.go('login');
          }else{
-             $(".navbarApp").css("display","block");
-             $('.userName').html(window.localStorage.getItem("user"));
+            $(".navbarApp").css("display","block");
+            $('.userName').html(window.localStorage.getItem("user"));
+            $('.navTab').find('.btnTabAct').removeClass('btnTabAct');
+            $('#grocerylist').addClass('btnTabAct');
          }
         },
         onExit: '',

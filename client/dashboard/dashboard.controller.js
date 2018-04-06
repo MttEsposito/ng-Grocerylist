@@ -8,6 +8,7 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
 		        method : "GET",
 		        url : appCostants.dashboardServerUrl,
 		        cache:false,
+		        timeout: 10000,
 		        params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}
 		    };
 		    ajaxSrv.execAjax(config)

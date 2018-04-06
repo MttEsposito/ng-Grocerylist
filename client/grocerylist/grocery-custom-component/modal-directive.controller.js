@@ -16,6 +16,7 @@ angular.module('nGgroceryList').controller('modalCtrl',function($scope,grocerySr
                     url : appCostants.groceryServerUrl,
                     headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
                     cache:false,
+                    timeout: 10000,
                     data: {listitem: resItem,qtyitem: resQty,price:totalCurrency,userId:window.localStorage.getItem('userId')}
                 };
                 ajaxSrv.execAjax(config)

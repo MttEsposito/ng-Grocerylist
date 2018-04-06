@@ -10,6 +10,7 @@ angular.module('nGgroceryList').controller('loginCtrl', function($scope,$state,l
                 method : "POST",
                 url : appCostants.loginServerUrl,
                 cache:false,
+                timeout: 10000,
                 headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
                 data: {email: emailUser,password: passwordUser}
             };
