@@ -1,6 +1,7 @@
-window.addEventListener('keyboardWillShow', () => {
+let eventKeyboard = window.addEventListener;
+eventKeyboard('keyboardWillShow', () => {
     $('#groceryListPrint').css('max-height','165px');
 });
-window.addEventListener('keyboardWillHide', () => {
+eventKeyboard('keyboardWillHide', () => {
     $('#groceryListPrint').css('max-height','455px');
 });

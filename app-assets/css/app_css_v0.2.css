@@ -109,14 +109,7 @@ spacerapp{
     display: block;
     height: 12px;
 }
-.alert-app-error{
-    padding: 7px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-}
+
 /* grocerylist css*/
 itemlist{
     color: #1ABC9C;
@@ -309,9 +302,9 @@ md-select:not([disabled]):focus .md-select-value{
     opacity: 1;
 }
 .modalComplete{
-    box-shadow: 0 3px 9px 1px #cccccc4d;
-    -webkit-box-shadow: 0 3px 9px 1px #cccccc4d;
-    -moz-box-shadow: inset 0 3px 9px 1px #cccccc4d;
+    box-shadow: 0 3px 9px 1px rgba(204, 204, 204, 0.30196078431372547);
+    -webkit-box-shadow: 0 3px 9px 1px rgba(204, 204, 204, 0.30196078431372547);
+    -moz-box-shadow: inset 0 3px 9px 1px rgba(204, 204, 204, 0.30196078431372547);
     border:0px;
 }
 
@@ -374,19 +367,7 @@ itemrecap{
     overflow-y: scroll;
     transition: 0.3s;
 }
-.overlayOffline{
-    background-color: #1ABC9C;
-    border-radius: 4px;
-    height: 20%;
-    box-shadow: 0 3px 9px 1px #cccccc4d;
-    -webkit-box-shadow: 0 3px 9px 1px #cccccc4d;
-    -moz-box-shadow: 0 3px 9px 1px #cccccc4d;
-    border: 0px;
-    color: #fff;
-    font-size: 16px;
-    text-align:center;
-    padding-top: 25px;
-}
+
 .dataContPrint{
     padding: 8px 10px;
     color: #fff;
@@ -427,14 +408,7 @@ dataSpent{
     margin-bottom: -9px;
     color: #fff;
 }
- @media (min-width: 600px) {
-    .shoppList {
-        max-height: 186px!important;
-    }
-    .modalList{
-        max-height: 100px;
-    }
-}
+
 close{
     width: 100%;
     height: 100%;
@@ -446,4 +420,17 @@ close{
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.40);
     z-index: 2000;
+}
+
+.avg-spent{
+    margin:0;
+}
+
+ @media (min-width: 600px) {
+    .shoppList {
+        max-height: 186px!important;
+    }
+    .modalList{
+        max-height: 100px;
+    }
 }

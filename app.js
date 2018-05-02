@@ -9,7 +9,7 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
         controllerAs: 'loginCtrl',
         templateUrl: 'client/login/login.html',
         onEnter: function($state){
-            if(window.localStorage.getItem("sessionLog")=='set'){
+            if(window.localStorage.getItem('sessionLog') == 'set'){
                 $state.go('grocerylist')
             }
         },
@@ -22,11 +22,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
         controllerAs: 'dashCtrl',
         templateUrl: 'client/dashboard/dashboard.html',
         onEnter: function($state){
-         if(window.localStorage.getItem("sessionLog")!='set'){
+         if(window.localStorage.getItem('sessionLog') != 'set'){
            $state.go('login');
          }else{
-            $(".navbarApp").css("display","block");
-            $('.userName').html(window.localStorage.getItem("user"));
+            $('.navbarApp').css('display','block');
+            $('.userName').html(window.localStorage.getItem('user'));
             $('.navTab').find('.btnTabAct').removeClass('btnTabAct');
             $('#dashboard').addClass('btnTabAct');
          }
@@ -40,11 +40,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
         controllerAs: 'groceryCtrl',
         templateUrl: 'client/grocerylist/grocery.html',
         onEnter: function($state){
-         if(window.localStorage.getItem("sessionLog")!='set'){
+         if(window.localStorage.getItem('sessionLog') != 'set'){
            $state.go('login');
          }else{
-            $(".navbarApp").css("display","block");
-            $('.userName').html(window.localStorage.getItem("user"));
+            $('.navbarApp').css('display','block');
+            $('.userName').html(window.localStorage.getItem('user'));
             $('.navTab').find('.btnTabAct').removeClass('btnTabAct');
             $('#grocerylist').addClass('btnTabAct');
          }
@@ -54,11 +54,11 @@ angular.module('nGgroceryList', ['ngMaterial', 'ui.router', 'ngResource', 'ngSan
       //on error location redirect
       $urlRouterProvider.otherwise(function($injector, $location){
         let state = $injector.get('$state');
-          if(window.localStorage.getItem("sessionLog")=='set'){
+        if(window.localStorage.getItem('sessionLog') == 'set'){
             $location.path('/grocerylist');
-          }else{
+        }else{
             $location.path('/');
-          }
-          return $location.path();
+        }
+        return $location.path();
     });
 });

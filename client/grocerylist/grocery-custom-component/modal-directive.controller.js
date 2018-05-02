@@ -1,29 +1,30 @@
 angular.module('nGgroceryList').controller('modalCtrl',function($scope,grocerySrv,appCostants,modalGrocerySrv,ajaxSrv){
-        $scope.saveData=function(){
-            let totalCurrency=$('#totalSpent').val();
-            if(totalCurrency!='')
+        $scope.saveData = function(){
+            let totalCurrency = $('#totalSpent').val();
+            if(totalCurrency != '')
             {
-                let totalItem='',totalQty='';
+                let totalItem = '',totalQty = '';
                 for(let index of $scope.products){
-                    totalItem+=index.item + ';';
-                    totalQty+=index.numberitem + ';'; 
+                    totalItem += index.item + ';';
+                    totalQty += index.numberitem + ';'; 
                 }
-                let resItem=totalItem.substring(0, totalItem.length-1);
-                let resQty=totalQty.substring(0, totalQty.length-1);
-                modalGrocerySrv.btnStoreDataEvent(0)
-                let config={ 
-                    method : "POST",
+                let resItem = totalItem.substring(0, totalItem.length-1);
+                let resQty = totalQty.substring(0, totalQty.length-1);
+                modalGrocerySrv.btnStoreDataEvent(0);
+                let appStorage = window.localStorage;
+                let config = { 
+                    method : 'POST',
                     url : appCostants.groceryServerUrl,
                     headers : {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'},
-                    cache:false,
-                    timeout: 10000,
-                    data: {listitem: resItem,qtyitem: resQty,price:totalCurrency,userId:window.localStorage.getItem('userId')}
+                    cache : false,
+                    timeout : 10000,
+                    data: {listitem : resItem,qtyitem : resQty,price : totalCurrency,userid : appStorage.getItem('userid'),username : appStorage.getItem('user')}
                 };
                 ajaxSrv.execAjax(config)
                 .then(function(response){
                     $('#completeShopping').modal('hide');
                     modalGrocerySrv.btnStoreDataEvent(1)
-                    if(response.data.success=="success"){
+                    if(response.data.success == "success"){
                         $('#completeBtn').css('transform','scale(0)');
                         modalGrocerySrv.showToastApp(appCostants.toastSaveSuccess);
                         $scope.products = [];
@@ -38,7 +39,7 @@ angular.module('nGgroceryList').controller('modalCtrl',function($scope,grocerySr
             }
             else
             {
-                grocerySrv.blankInput("totalSpent");
+                grocerySrv.blankInput('totalSpent');
             }
         }
 })

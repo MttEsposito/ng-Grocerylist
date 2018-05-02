@@ -5,12 +5,14 @@ angular.module('nGgroceryList').directive('userLogOut',function($state){
                     let appStorage = window.localStorage;
                     $('body').append("<close><center><div class='loader'></div><center></close>");
                     appStorage.removeItem("user");
-                    appStorage.removeItem("userId");
+                    appStorage.removeItem("userid");
                     appStorage.setItem('sessionLog', 'unset');
                     setTimeout(function(){
                         $(".navbarApp").css("display","none");
                         $state.go('login');
-                        $('close').remove();
+                        setTimeout(function() {
+                            $('close').remove();
+                        },1500)
                 },1500)
             }); 
         }

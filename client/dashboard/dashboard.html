@@ -1,31 +1,37 @@
-<div class="contentSite" ng-init="getDataUser()">
+<div class = "contentSite" ng-init = "getDataUser()">
     <center>
-        <h3 class='titleDasSort'>Sort data by</h3>
-        <md-input-container ng-click="checkClick()">
-    		<md-select id="selectTime" ng-model="dataTime.selectedOptions" ng-change="updateData()" aria-label="dataSelect" class="selectData">
-    		    <md-option ng-value="data" ng-repeat="data in dataTime.availableOptions track by data.id" ng-selected="$last" class="selectData">
-    				{{ data.id }}
-    			</md-option>
-    		</md-select>
-    	</md-input-container>
-	</center>
-	<center id="loader">
-        <div class="loader"></div> 
+        <h3 class = "titleDasSort">Sort data by</h3>
+        <md-input-container ng-click = "checkClick()">
+            <md-select id = "selectTime" ng-model = "dataTimeLine" ng-change = "updateData()" aria-label = "dataSelect" class = "selectData">
+                <md-option ng-value = "data" ng-repeat = "data in dataTime" ng-selected = "$first" class = "selectData">
+                    {{ data }}
+                </md-option>
+            </md-select>
+        </md-input-container>
     </center>
-    <center id="errorLabel"></center>
-    <div id="dataPrinter">
-    <center class="graphContainer">
-        <canvas id='chartPrint'></canvas>
-        <xaxes class="hide">date</xaxes>
+    <center id = "loader">
+        <div class = "loader"></div>
     </center>
-    <div class="dataContPrint">
-    <p>Higher spent : <dataSpent>{{maxSpent}} €</dataSpent></p>
-    <p>Lower spent : <dataSpent>{{minSpent}} €</dataSpent></p>
-    <p>Average spent : <dataSpent>{{averageSpent}} €</dataSpent></p>
-    </div>
-    <center>
-        <h3 class='titleDas'>Grocery List recap:</h3>
-    </center>
-        <div id="recapListPrint" ng-bind-html="recapList"></div>
+    <center id = "errorLabel"></center>
+    <div id = "dataPrinter">
+        <center class = "graphContainer">
+            <canvas id = "chartPrint"></canvas>
+            <xaxes class = "hide">date</xaxes>
+        </center>
+        <div class = "dataContPrint">
+            <p class = "max-spent">Higher spent :
+                <dataSpent>{{maxSpent}} €</dataSpent>
+            </p>
+            <p class = "min-spent">Lower spent :
+                <dataSpent>{{minSpent}} €</dataSpent>
+            </p>
+            <p class = "avg-spent">Average spent :
+                <dataSpent>{{averageSpent}} €</dataSpent>
+            </p>
+        </div>
+        <center>
+            <h3 class = "titleDas">Grocery List recap:</h3>
+        </center>
+        <div id = "recapListPrint" ng-bind-html = "recapList"></div>
     </div>
 </div>

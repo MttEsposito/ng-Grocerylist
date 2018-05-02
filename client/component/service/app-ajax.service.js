@@ -1,17 +1,17 @@
 angular.module('nGgroceryList').service('ajaxSrv', function($http,$q) {
     //function for made httpcall
-	this.execAjax=function(configHttp){
-        let config=configHttp;
+	this.execAjax = function(configHttp){
+        let config = configHttp;
         return $q(function(resolve,reject){
-            let startAjaxCall=function(){
+            function startAjaxCall(){
                 $http(config)
                 .then(successResult)
                 .catch(failResult)
             };
-            let successResult=function(res){
+            function successResult(res){
                 resolve(res);
             };
-            let failResult=function(err){
+            function failResult(err){
                 reject(err);
             };
             startAjaxCall();

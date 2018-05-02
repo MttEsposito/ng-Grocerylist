@@ -1,27 +1,27 @@
-angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv,appCostants,ajaxSrv) {
-		let isClick=false,dataY=[],dataX=[],recapPrint=[];
-		$scope.getDataUser=function(){
+angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,dashSrv,appCostants,ajaxSrv){
+		let isClick = false, dataY = [], dataX = [], recapPrint = [];
+		$scope.getDataUser = function(){
 		    $('#loader').removeClass('hide');
 		    $('#dataPrinter').addClass('hide');
 		    $('#errorLabel').addClass('hide');
-		    let config={
-		        method : "GET",
+		    let appStorage = window.localStorage;
+		    let config = {
+		        method : 'GET',
 		        url : appCostants.dashboardServerUrl,
-		        cache:false,
-		        timeout: 10000,
-		        params: {timeLine: $scope.dataTime.selectedOptions.data,userId:window.localStorage.getItem('userId')}
+		        cache : false,
+		        timeout : 10000,
+		        params : { timeLine : $scope.dataTimeLine, userid : appStorage.getItem('userid'), username : appStorage.getItem('user')}
 		    };
 		    ajaxSrv.execAjax(config)
             .then(function(res){
-                let item=[],qty=[];
-                dataY=[],dataX=[],recapPrint=[];
+                let item = [],qty = [];
+                dataY = [], dataX = [], recapPrint = [];
                 $('#loader').addClass('hide');
 		        $('#dataPrinter').removeClass('hide');
-		        if(res.data.nodata=="nodata")
+		        if(res.data.nodata == 'nodata')
 		        {
 		            $('#dataPrinter').addClass('hide');
-		            $('#errorLabel').removeClass('hide');
-		            $('#errorLabel').html(appCostants.dashboardError);
+		            $('#errorLabel').removeClass('hide').html(appCostants.dashboardError);
 		        }
 		        else
 		        {
@@ -32,20 +32,20 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
                         dataY.push(index.prezzo);
                         item.push(index.item);
                         qty.push(index.qty);
-                        if(index.item.includes(";"))
+                        if(index.item.includes(';'))
                         {
                             recapPrint.push({
-                                item:index.item.split(";"),
-                                qty:index.qty.split(";"),
-                                date:index.data
+                                item : index.item.split(';'),
+                                qty : index.qty.split(';'),
+                                date : index.data
                             });
                         }
                         else
                         {
                             recapPrint.push({
-                                item:index.item,
-                                qty:index.qty,
-                                date:index.data
+                                item : index.item,
+                                qty : index.qty,
+                                date : index.data
                             });
                         }
                     }
@@ -63,27 +63,17 @@ angular.module('nGgroceryList').controller('dashCtrl', function($scope,$http,das
             })
             .catch(function(err){
                $('#loader').addClass('hide');
-               $('#errorLabel').removeClass('hide');
+               $('#errorLabel').removeClass('hide').html(appCostants.dashboardFail);
                $('#dataPrinter').addClass('hide');
-               $('#errorLabel').html(appCostants.dashboardFail); 
             })
 		}
-	$scope.updateData=function(){
+	$scope.updateData = function(){
 	    if(isClick){
 	        $scope.getDataUser();
 	    }
 	}
-	$scope.checkClick=function(){
-		isClick=true;
+	$scope.checkClick = function(){
+		isClick = true;
 	}
-    $scope.dataTime = {
- 	 availableOptions: [
- 		 {id: "Week", data :"week" },
- 		 {id: "Month", data : "month"},
- 		 {id: "All", data : "all"},
- 	 ],
- 	 selectedOptions:[{
-		 id: "All", data : "all",
- 	 }]
- 	 };
+ 	$scope.dataTime = ['Week','Month','All'];
 })

@@ -1,5 +1,13 @@
 PROJECT OF A SIMPLE GROCERYLIST WEBAPP
 *--------------------------------------*
+
+Technology of the APP
+
+HTML+CSS+JS+PHP
+
+FrontEnd: framework ANgularJs
+BackEnd: PHP + MySql
+
 Points of the app:
 
 1)As a User i need to Login for using the app |X|
